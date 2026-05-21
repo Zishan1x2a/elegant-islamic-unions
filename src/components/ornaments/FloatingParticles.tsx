@@ -1,8 +1,11 @@
 import { useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export function FloatingParticles({ count = 24, className = "" }: { count?: number; className?: string }) {
   const reduced = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const particles = useMemo(
     () =>
       Array.from({ length: count }).map((_, i) => ({
@@ -16,6 +19,7 @@ export function FloatingParticles({ count = 24, className = "" }: { count?: numb
       })),
     [count],
   );
+  if (!mounted) return null;
   return (
     <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {particles.map((p) => (
