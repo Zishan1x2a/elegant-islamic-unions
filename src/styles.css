@@ -288,6 +288,61 @@
   }
   .anim-pulse-glow { animation: pulse-glow 5s ease-in-out infinite; }
 
+  /* === Cinematic intro effects === */
+  @keyframes ambient-drift {
+    0%   { transform: translate3d(-5%, -5%, 0) scale(1.1); }
+    50%  { transform: translate3d(5%, 3%, 0) scale(1.2); }
+    100% { transform: translate3d(-5%, -5%, 0) scale(1.1); }
+  }
+  .anim-ambient-drift { animation: ambient-drift 18s ease-in-out infinite; }
+
+  @keyframes ring-pulse {
+    0%, 100% { transform: scale(1);   opacity: 0.85; filter: blur(0px); }
+    50%      { transform: scale(1.04); opacity: 1;    filter: blur(0.5px); }
+  }
+  .anim-ring-pulse { animation: ring-pulse 3.2s ease-in-out infinite; }
+
+  @keyframes ring-rotate { to { transform: rotate(360deg); } }
+  .anim-ring-rotate { animation: ring-rotate 22s linear infinite; }
+  .anim-ring-rotate-rev { animation: ring-rotate 30s linear infinite reverse; }
+
+  @keyframes wave-diagonal {
+    0%   { transform: translate(-60vw, 60vh) scale(0.2); opacity: 0; filter: blur(20px); }
+    20%  { opacity: 0.9; }
+    100% { transform: translate(60vw, -60vh) scale(2.4); opacity: 0; filter: blur(40px); }
+  }
+  .anim-wave-diagonal { animation: wave-diagonal 2.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+  @keyframes streak-diagonal {
+    0%   { transform: translate(-80vw, 80vh) rotate(-45deg); opacity: 0; }
+    25%  { opacity: 1; }
+    100% { transform: translate(80vw, -80vh) rotate(-45deg); opacity: 0; }
+  }
+  .anim-streak-diagonal { animation: streak-diagonal 2.2s cubic-bezier(0.7, 0, 0.3, 1) forwards; }
+
+  @keyframes blur-focus {
+    0%   { opacity: 0; filter: blur(24px); transform: scale(1.08); letter-spacing: 0.15em; }
+    100% { opacity: 1; filter: blur(0);    transform: scale(1);    letter-spacing: 0; }
+  }
+  .anim-blur-focus { animation: blur-focus 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+  @keyframes fade-up-luxe {
+    0%   { opacity: 0; transform: translateY(28px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+  }
+  .anim-fade-up-luxe { animation: fade-up-luxe 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; opacity: 0; }
+
+  @keyframes dust-float {
+    0%   { transform: translateY(0)    translateX(0);   opacity: 0; }
+    20%  { opacity: 0.8; }
+    100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+  }
+
+  .cine-vignette {
+    background:
+      radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.95) 100%);
+  }
+
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
