@@ -13,6 +13,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section ref={ref} id="hero" className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden bg-[#0A0907]">
@@ -27,25 +28,55 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
       <div className="vignette absolute inset-0 -z-10" />
       <FloatingParticles count={20} />
 
-      <div className="relative mx-auto flex max-w-5xl flex-col items-center px-6 py-24 text-center text-[#FAF8F3]">
+      {/* Soft gold halo behind the title */}
+      <div
+        aria-hidden
+        className="anim-pulse-glow pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(201,168,76,0.28) 0%, rgba(201,168,76,0.08) 40%, transparent 70%)",
+        }}
+      />
+
+      <motion.div style={{ opacity }} className="relative mx-auto flex max-w-5xl flex-col items-center px-6 py-24 text-center text-[#FAF8F3]">
         <Reveal>
           <p className="font-sans-soft text-[11px] uppercase tracking-[0.5em] text-[#E8D5A3]/80">
             Together with their families
           </p>
         </Reveal>
 
+        {/* Quranic ayah block — like reference */}
         <Reveal delay={0.15}>
-          <p dir="rtl" lang="ar" className="font-arabic gold-shimmer mt-8 text-3xl sm:text-4xl md:text-5xl">
-            {wedding.groom.arabic} &amp; {wedding.bride.arabic}
+          <p dir="rtl" lang="ar" className="font-arabic gold-shimmer mt-8 text-2xl sm:text-3xl md:text-4xl">
+            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+          </p>
+        </Reveal>
+        <Reveal delay={0.3}>
+          <p className="font-serif-display mx-auto mt-5 max-w-xl text-balance text-base italic text-[#FAF8F3]/85 sm:text-lg">
+            "And of His signs is that He created for you mates from among yourselves,
+            that you may find tranquility in them."
+          </p>
+          <p className="mt-2 font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/80">
+            — Qur'an 30:21
           </p>
         </Reveal>
 
-        <Reveal delay={0.3}>
-          <h1 className="font-serif-display mt-6 text-5xl font-light leading-[0.95] tracking-tight sm:text-7xl md:text-[112px]">
-            <span className="block">{wedding.groom.name}</span>
-            <span className="font-script my-2 block text-4xl text-[#C9A84C] sm:text-5xl md:text-6xl">&amp;</span>
-            <span className="block">{wedding.bride.name}</span>
-          </h1>
+        {/* Script title — matches the reference image */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="script-luxe mt-12 text-balance text-6xl leading-[1.05] sm:text-7xl md:text-8xl lg:text-[128px]"
+        >
+          {wedding.groom.name}{" "}
+          <span className="inline-block px-2 align-middle text-5xl sm:text-6xl md:text-7xl">&amp;</span>{" "}
+          {wedding.bride.name}
+        </motion.h1>
+
+        <Reveal delay={1.0}>
+          <p dir="rtl" lang="ar" className="font-arabic mt-4 text-xl text-[#E8D5A3] sm:text-2xl">
+            {wedding.groom.arabic} &amp; {wedding.bride.arabic}
+          </p>
         </Reveal>
 
         <Reveal delay={0.5}>
@@ -53,8 +84,8 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         </Reveal>
 
         <Reveal delay={0.6}>
-          <p className="font-serif-display mt-6 text-xl italic text-[#E8D5A3]/90 sm:text-2xl">
-            invite you to celebrate their wedding
+          <p className="font-script mt-6 text-3xl text-[#E8D5A3] sm:text-4xl">
+            invite you to celebrate their union
           </p>
         </Reveal>
 
@@ -75,11 +106,11 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         </Reveal>
 
         <Reveal delay={1.1}>
-          <p className="mt-10 font-script text-2xl text-[#E8D5A3]/80">
+          <p className="mt-10 font-script text-3xl text-[#E8D5A3]/85 sm:text-4xl">
             For {guest.name} {guest.honorific}
           </p>
         </Reveal>
-      </div>
+      </motion.div>
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
         <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/60">Scroll</p>
