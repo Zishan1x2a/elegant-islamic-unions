@@ -80,7 +80,7 @@ export function Ceremonies({ guest }: { guest: Guest }) {
             <motion.article
               key={c.id}
               initial={{ opacity: 0, y: 60, filter: "blur(24px)", scale: 0.92, rotateX: -10 }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(1px)", scale: 1, rotateX: 0 }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1, rotateX: 0 }}
               whileHover={{ scale: 1.03, rotateY: i % 2 === 1 ? 4 : -4, rotateX: -2, filter: "blur(1px) brightness(1.08)" }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.9, delay: i * 0.18, ease: [1.22, 1, 0.36, 1] }}
