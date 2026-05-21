@@ -1,26 +1,62 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { readGuestFromUrl } from "@/lib/guest";
+import { OpeningScreen } from "@/components/sections/OpeningScreen";
+import { MobileNav } from "@/components/sections/MobileNav";
+import { Hero } from "@/components/sections/Hero";
+import { LoveStory } from "@/components/sections/LoveStory";
+import { Ceremonies } from "@/components/sections/Ceremonies";
+import { Gallery } from "@/components/sections/Gallery";
+import { Family } from "@/components/sections/Family";
+import { Countdown } from "@/components/sections/Countdown";
+import { DuaWall } from "@/components/sections/DuaWall";
+import { Rsvp } from "@/components/sections/Rsvp";
+import { Footer } from "@/components/sections/Footer";
+import { AudioPlayer } from "@/components/ornaments/AudioPlayer";
+import { CursorGlow } from "@/components/ornaments/CursorGlow";
+import { ScrollProgress } from "@/components/ornaments/ScrollProgress";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  const [opening, setOpening] = useState(true);
+  const [rsvpOpen, setRsvpOpen] = useState(false);
+  const [guest] = useState(() => readGuestFromUrl());
+
+  useEffect(() => {
+    if (!opening) document.body.style.overflow = "";
+    else document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [opening]);
+
+  return (
+    <main className="relative">
+      <AnimatePresence>
+        {opening && (
+          <OpeningScreen guest={guest} onOpen={() => setOpening(false)} />
+        )}
+      </AnimatePresence>
+
+      <ScrollProgress />
+      <CursorGlow />
+      <MobileNav />
+
+      <Hero guest={guest} onRsvp={() => setRsvpOpen(true)} />
+      <LoveStory />
+      <Ceremonies guest={guest} />
+      <Gallery />
+      <Family />
+      <Countdown />
+      <DuaWall />
+      <Rsvp open={rsvpOpen} setOpen={setRsvpOpen} guest={guest} />
+      <Footer />
+
+      <AudioPlayer />
+    </main>
+  );
 }
