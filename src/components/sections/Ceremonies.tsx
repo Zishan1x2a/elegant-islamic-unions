@@ -75,54 +75,62 @@ export function Ceremonies({ guest }: { guest: Guest }) {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2" style={{ perspective: "1200px" }}>
           {visible.map((c, i) => (
             <motion.article
               key={c.id}
-              initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 60, filter: "blur(24px)", scale: 0.92, rotateX: -10 }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1, rotateX: 0 }}
+              whileHover={{ scale: 1.03, rotateY: i % 2 === 1 ? 4 : -4, rotateX: -2, filter: "blur(1px) brightness(1.08)" }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.9, delay: i * 0.18, ease: [1.22, 1, 0.36, 1] }}
               className="group relative overflow-hidden rounded-3xl"
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="glass-card-dark gold-border-glow relative rounded-3xl p-7 transition-transform duration-500 group-hover:-translate-y-1 sm:p-9">
-                <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent" />
-                <div aria-hidden className={`absolute inset-0 -z-10 bg-gradient-to-br ${accentBg[c.accent]} opacity-60`} />
+              <div className="glass-card-dark gold-border-glow relative rounded-3xl p-7 transition-shadow duration-500 group-hover:shadow-[0_0_60px_-10px_rgba(201,168,76,0.45)] sm:p-9">
+                <span className="absolute inset-x-0 top-2 h-px bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent group-hover:scale-x-75 group-hover:transition-transform group-hover:duration-700" />
+                <div aria-hidden className={`absolute inset-0 -z-10 bg-gradient-to-br ${accentBg[c.accent]} opacity-60 transition-opacity duration-500 group-hover:opacity-90`} />
+
+                {/* hover shine sweep */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/6 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                />
 
                 <div className="flex items-start justify-between">
                   <div>
                     <p dir="rtl" className="font-arabic text-2xl text-[#E8D5A3]">
                       {c.arabic}
                     </p>
-                    <h3 className="font-serif-display mt-1 text-4xl font-light tracking-tight">
+                    <h3 className="font-serif-display mt-1 text-4xl font-light tracking-tight transition-colors duration-500 group-hover:text-[#FFF3D6]">
                       {c.name}
                     </h3>
                   </div>
-                  <div className="rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 p-3">
+                  <div className="rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 p-3 transition-all duration-500 group-hover:scale-110 group-hover:border-[#C9A84C]/80 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.35)] group-hover:rotate-12">
                     <CeremonyIcon kind={c.icon} />
                   </div>
                 </div>
 
                 <ul className="mt-6 space-y-3 font-sans-soft text-sm text-[#FAF8F3]/85">
-                  <li className="flex items-center gap-3">
-                    <Calendar className="h-4 w-4 text-[#C9A84C]" />
-                    {c.date}
+                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1">
+                    <Calendar className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
+                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.date}</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <Clock className="h-4 w-4 text-[#C9A84C]" />
-                    {c.time}
+                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.05s" }}>
+                    <Clock className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
+                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.time}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                  <li className="flex items-start gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.1s" }}>
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
                     <span>
                       <span className="font-serif-display text-base italic text-[#FAF8F3]">{c.venue}</span>
                       <br />
                       <span className="text-[#E8D5A3]/70">{c.address}</span>
                     </span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <Shirt className="h-4 w-4 text-[#C9A84C]" />
-                    {c.dressCode}
+                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.15s" }}>
+                    <Shirt className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
+                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.dressCode}</span>
                   </li>
                 </ul>
 
@@ -130,10 +138,10 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                   href={c.mapsUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/50 px-5 py-2.5 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/15"
+                  className="mt-7 inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/50 px-5 py-2.5 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#E8D5A3] transition-all duration-500 hover:bg-[#C9A84C]/20 hover:shadow-[0_0_30px_-5px_rgba(201,168,76,0.4)] hover:border-[#C9A84C]/80"
                 >
                   Open in Maps
-                  <ExternalLink className="h-3.5 w-3.5" />
+                  <ExternalLink className="h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               </div>
             </motion.article>
