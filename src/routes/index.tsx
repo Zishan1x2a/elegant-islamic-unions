@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { readGuestFromUrl } from "@/lib/guest";
 import { OpeningScreen } from "@/components/sections/OpeningScreen";
-import { MobileNav } from "@/components/sections/MobileNav";
 import { Hero } from "@/components/sections/Hero";
 import { LoveStory } from "@/components/sections/LoveStory";
 import { Ceremonies } from "@/components/sections/Ceremonies";
@@ -44,7 +43,6 @@ function Index() {
 
       <ScrollProgress />
       <CursorGlow />
-      <MobileNav />
 
       <Hero guest={guest} onRsvp={() => setRsvpOpen(true)} />
       <LoveStory />
