@@ -72,19 +72,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Ahmad & Aisha — A Luxury Muslim Wedding Invitation" },
+      {
+        name: "description",
+        content:
+          "A cinematic Islamic wedding invitation. Join Ahmad & Aisha for Nikah, Mehndi, and Walima — RSVP inside.",
+      },
+      { name: "theme-color", content: "#163C32" },
+      { property: "og:title", content: "Ahmad & Aisha — Wedding Invitation" },
+      {
+        property: "og:description",
+        content: "A cinematic Islamic wedding experience. RSVP inside.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap",
       },
     ],
   }),
