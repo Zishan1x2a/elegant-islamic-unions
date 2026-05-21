@@ -249,6 +249,45 @@
   }
   .anim-rotate-slow { animation: rotate-slow 60s linear infinite; }
 
+  @keyframes draw-ring {
+    from { stroke-dashoffset: 760; }
+    to   { stroke-dashoffset: 0; }
+  }
+  .anim-draw-ring {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 760;
+    animation: draw-ring 3s ease-out forwards;
+  }
+
+  @keyframes gold-sweep {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .script-luxe {
+    font-family: var(--font-script);
+    background: linear-gradient(
+      100deg,
+      #8B7355 0%,
+      #C9A84C 25%,
+      #FFF3D6 50%,
+      #C9A84C 75%,
+      #8B7355 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gold-sweep 8s ease-in-out infinite;
+    filter: drop-shadow(0 4px 18px rgba(201,168,76,0.35));
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.35; transform: scale(1); }
+    50%      { opacity: 0.7;  transform: scale(1.08); }
+  }
+  .anim-pulse-glow { animation: pulse-glow 5s ease-in-out infinite; }
+
   /* Respect reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

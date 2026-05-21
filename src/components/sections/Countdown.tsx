@@ -17,11 +17,13 @@ function diff(target: Date) {
 
 export function Countdown() {
   const target = new Date(wedding.dateISO);
-  const [t, setT] = useState(() => diff(target));
+  const [t, setT] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   useEffect(() => {
+    setT(diff(target));
     const id = window.setInterval(() => setT(diff(target)), 1000);
     return () => clearInterval(id);
-  }, [target]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const cards: Array<[string, string, number]> = [
     ["Days", "أَيَّام", t.days],
