@@ -38,21 +38,21 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         }}
       />
 
-      <motion.div style={{ opacity }} className="relative mx-auto flex max-w-5xl flex-col items-center px-6 py-24 text-center text-[#FAF8F3]">
+      <motion.div style={{ opacity }} className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-24 text-center text-[#FAF8F3]">
         <Reveal>
           <p className="font-sans-soft text-[11px] uppercase tracking-[0.5em] text-[#E8D5A3]/80">
-            Together with their families
+            Together with their beloved families
           </p>
         </Reveal>
 
-        {/* Quranic ayah block — like reference */}
+        {/* Quranic ayah */}
         <Reveal delay={0.15}>
           <p dir="rtl" lang="ar" className="font-arabic gold-shimmer mt-8 text-2xl sm:text-3xl md:text-4xl">
             وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
           </p>
         </Reveal>
         <Reveal delay={0.3}>
-          <p className="font-serif-display mx-auto mt-5 max-w-xl text-balance text-base italic text-[#FAF8F3]/85 sm:text-lg">
+          <p className="font-serif-display mx-auto mt-5 max-w-2xl text-balance text-base italic text-[#FAF8F3]/85 sm:text-lg">
             "And of His signs is that He created for you mates from among yourselves,
             that you may find tranquility in them."
           </p>
@@ -61,43 +61,89 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
           </p>
         </Reveal>
 
-        {/* Script title — matches the reference image */}
+        {/* Script title — couple name like reference */}
         <motion.h1
           initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="script-luxe mt-12 text-balance text-6xl leading-[1.05] sm:text-7xl md:text-8xl lg:text-[128px]"
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="script-luxe mt-10 text-balance text-6xl leading-[1.05] sm:text-7xl md:text-8xl lg:text-[120px]"
         >
-          {wedding.groom.name}{" "}
-          <span className="inline-block px-2 align-middle text-5xl sm:text-6xl md:text-7xl">&amp;</span>{" "}
-          {wedding.bride.name}
+          {wedding.groom.name} &amp; {wedding.bride.name}
         </motion.h1>
 
-        <Reveal delay={1.0}>
-          <p dir="rtl" lang="ar" className="font-arabic mt-4 text-xl text-[#E8D5A3] sm:text-2xl">
+        <Reveal delay={0.8}>
+          <p dir="rtl" lang="ar" className="font-arabic mt-3 text-xl text-[#E8D5A3] sm:text-2xl">
             {wedding.groom.arabic} &amp; {wedding.bride.arabic}
           </p>
         </Reveal>
 
-        <Reveal delay={0.5}>
+        <Reveal delay={0.9}>
           <ArabesqueDivider className="mt-8" />
         </Reveal>
 
-        <Reveal delay={0.6}>
-          <p className="font-script mt-6 text-3xl text-[#E8D5A3] sm:text-4xl">
+        {/* Couple definition — two columns about groom & bride */}
+        <div className="mt-14 grid w-full grid-cols-1 items-start gap-10 md:grid-cols-[1fr_auto_1fr] md:gap-6">
+          <Reveal delay={1.0}>
+            <div className="text-center md:text-right">
+              <p className="font-sans-soft text-[10px] uppercase tracking-[0.45em] text-[#E8D5A3]/70">
+                The Groom
+              </p>
+              <p className="font-script mt-3 text-5xl text-[#FFF3D6] sm:text-6xl">
+                {wedding.groom.name}
+              </p>
+              <p className="font-serif-display mt-2 text-base italic text-[#E8D5A3]">
+                Son of the {wedding.groom.family} Family
+              </p>
+              <p className="font-serif-display mx-auto mt-4 max-w-xs text-balance text-sm leading-relaxed text-[#FAF8F3]/75 md:mx-0 md:ml-auto">
+                A man of quiet faith and gentle conviction — a hafidh of memories,
+                a seeker of sakeenah, and now, by Allah's grace, a husband-to-be.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={1.1}>
+            <div className="flex h-full flex-col items-center justify-center">
+              <span className="h-24 w-px bg-gradient-to-b from-transparent via-[#C9A84C] to-transparent" />
+              <p className="font-script my-3 text-5xl text-[#C9A84C]">&amp;</p>
+              <span className="h-24 w-px bg-gradient-to-b from-[#C9A84C] via-[#C9A84C] to-transparent" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={1.2}>
+            <div className="text-center md:text-left">
+              <p className="font-sans-soft text-[10px] uppercase tracking-[0.45em] text-[#E8D5A3]/70">
+                The Bride
+              </p>
+              <p className="font-script mt-3 text-5xl text-[#FFF3D6] sm:text-6xl">
+                {wedding.bride.name}
+              </p>
+              <p className="font-serif-display mt-2 text-base italic text-[#E8D5A3]">
+                Daughter of the {wedding.bride.family} Family
+              </p>
+              <p className="font-serif-display mx-auto mt-4 max-w-xs text-balance text-sm leading-relaxed text-[#FAF8F3]/75 md:mx-0 md:mr-auto">
+                A soul wrapped in modesty and noor — keeper of barakah, lover of
+                Qur'an, and the answered du'a of two families.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal delay={1.4}>
+          <p className="font-script mt-14 text-3xl text-[#E8D5A3] sm:text-4xl">
             invite you to celebrate their union
           </p>
         </Reveal>
 
-        <Reveal delay={0.75}>
-          <div className="mt-8 grid grid-cols-2 items-center gap-x-10 gap-y-3 font-sans-soft text-[11px] uppercase tracking-[0.35em] text-[#E8D5A3]">
+        <Reveal delay={1.5}>
+          <div className="mt-6 grid grid-cols-2 items-center gap-x-10 gap-y-3 font-sans-soft text-[11px] uppercase tracking-[0.35em] text-[#E8D5A3]">
             <div className="text-right">{wedding.dateLabel}</div>
             <div className="text-left">{wedding.venue}</div>
           </div>
         </Reveal>
 
-        <Reveal delay={0.95}>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+        <Reveal delay={1.6}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <GoldButton onClick={onRsvp}>RSVP — Qabool Karna</GoldButton>
             <a href="#ceremonies">
               <GoldButton variant="ghost-dark">View Events</GoldButton>
@@ -105,7 +151,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
           </div>
         </Reveal>
 
-        <Reveal delay={1.1}>
+        <Reveal delay={1.75}>
           <p className="mt-10 font-script text-3xl text-[#E8D5A3]/85 sm:text-4xl">
             For {guest.name} {guest.honorific}
           </p>
