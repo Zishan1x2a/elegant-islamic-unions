@@ -21,7 +21,7 @@ export function FloatingParticles({ count = 24, className = "" }: { count?: numb
   );
   if (!mounted) return null;
   return (
-    <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+    <div suppressHydrationWarning aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
       {particles.map((p) => (
         <motion.span
           key={p.id}
