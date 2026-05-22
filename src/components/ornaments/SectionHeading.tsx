@@ -29,7 +29,7 @@ export function SectionHeading({
         </Reveal>
       ) : null}
       <Reveal delay={0.2}>
-        <h2 className="font-serif-display mt-3 text-4xl font-light leading-[1.1] text-[#163C32] sm:text-5xl md:text-6xl">
+        <h2 className="wedding-heading mt-4 text-6xl sm:text-7xl md:text-8xl">
           {title}
         </h2>
       </Reveal>
