@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
-import { Calendar, Clock, MapPin, Shirt, Navigation, X } from "lucide-react";
+import { Calendar, Clock, MapPin, Shirt, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/ornaments/Reveal";
 import { ceremonies, type Ceremony } from "@/lib/wedding-data";
 import type { Guest } from "@/lib/guest";
@@ -56,7 +54,6 @@ const accentBg: Record<Ceremony["accent"], string> = {
 
 export function Ceremonies({ guest }: { guest: Guest }) {
   const visible = ceremonies.filter((c) => c.id !== "nikah" || guest.nikahAccess);
-  const [dressFor, setDressFor] = useState<Ceremony | null>(null);
   return (
     <section id="ceremonies" className="relative bg-gradient-to-b from-[#163C32] to-[#0F2A24] px-6 py-24 text-[#FAF8F3] sm:py-32">
       <div className="mx-auto max-w-6xl">
@@ -72,88 +69,74 @@ export function Ceremonies({ guest }: { guest: Guest }) {
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <h2 className="font-serif-display mt-3 text-5xl font-light leading-[1] sm:text-6xl">
-              Join us across <span className="gold-text italic">four nights</span>
+            <h2 className="wedding-heading mt-4 text-6xl sm:text-7xl md:text-8xl">
+              Our Celebrations
             </h2>
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2" style={{ perspective: "1200px" }}>
+        <div className="mt-16 grid gap-7 sm:grid-cols-2">
           {visible.map((c, i) => (
             <motion.article
               key={c.id}
-              initial={{ opacity: 0, y: 60, filter: "blur(24px)", scale: 0.92, rotateX: -10 }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1, rotateX: 0 }}
-              whileHover={{ scale: 1.03, rotateY: i % 2 === 1 ? 4 : -4, rotateX: -2, filter: "blur(1px) brightness(1.08)" }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.9, delay: i * 0.18, ease: [1.22, 1, 0.36, 1] }}
-              className={`group relative overflow-hidden rounded-[2rem] ${i % 3 === 1 ? "sm:translate-y-8" : ""}`}
-              style={{ transformStyle: "preserve-3d" }}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="event-card"
             >
-              <div className="glass-card-dark gold-border-glow relative rounded-3xl p-7 transition-shadow duration-500 group-hover:shadow-[0_0_60px_-10px_rgba(201,168,76,0.45)] sm:p-9">
-                <span className="absolute inset-x-0 top-2 h-px bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent group-hover:scale-x-75 group-hover:transition-transform group-hover:duration-700" />
-                <div aria-hidden className={`absolute inset-0 -z-10 bg-gradient-to-br ${accentBg[c.accent]} opacity-60 transition-opacity duration-500 group-hover:opacity-90`} />
-
-                {/* hover shine sweep */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/6 to-transparent transition-transform duration-700 group-hover:translate-x-full"
-                />
-
+              <div className="glass-card-dark relative rounded-[1.6rem] p-7 sm:p-9">
+                <div aria-hidden className={`absolute inset-0 -z-10 rounded-[1.6rem] bg-gradient-to-br ${accentBg[c.accent]} opacity-60`} />
                 <div className="flex items-start justify-between">
                   <div>
                     <p dir="rtl" className="font-arabic text-2xl text-[#E8D5A3]">
                       {c.arabic}
                     </p>
-                    <h3 className="font-serif-display mt-1 text-4xl font-light tracking-tight transition-colors duration-500 group-hover:text-[#FFF3D6]">
+                    <h3 className="font-script mt-1 text-5xl font-light tracking-tight text-[#FFF3D6]">
                       {c.name}
                     </h3>
                   </div>
-                  <div className="rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 p-3 transition-all duration-500 group-hover:scale-110 group-hover:border-[#C9A84C]/80 group-hover:shadow-[0_0_20px_rgba(201,168,76,0.35)] group-hover:rotate-12">
+                  <div className="rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 p-3">
                     <CeremonyIcon kind={c.icon} />
                   </div>
                 </div>
 
                 <ul className="mt-6 space-y-3 font-sans-soft text-sm text-[#FAF8F3]/85">
-                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1">
-                    <Calendar className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
-                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.date}</span>
+                  <li className="flex items-center gap-3">
+                    <Calendar className="h-4 w-4 text-[#C9A84C]" />
+                    <span>{c.date}</span>
                   </li>
-                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.05s" }}>
-                    <Clock className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
-                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.time}</span>
+                  <li className="flex items-center gap-3">
+                    <Clock className="h-4 w-4 text-[#C9A84C]" />
+                    <span>{c.time}</span>
                   </li>
-                  <li className="flex items-start gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.1s" }}>
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
+                  <li className="flex items-start gap-3">
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
                     <span>
                       <span className="font-serif-display text-base italic text-[#FAF8F3]">{c.venue}</span>
                       <br />
                       <span className="text-[#E8D5A3]/70">{c.address}</span>
                     </span>
                   </li>
-                  <li className="flex items-center gap-3 transition-transform duration-500 group-hover:translate-x-1" style={{ transitionDelay: "0.15s" }}>
-                    <Shirt className="h-4 w-4 text-[#C9A84C] transition-transform duration-500 group-hover:scale-110" />
-                    <span className="transition-colors duration-500 group-hover:text-[#FAF8F3]">{c.dressCode}</span>
+                  <li className="flex items-start gap-3">
+                    <Shirt className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                    <span>
+                      <span className="font-sans-soft text-[10px] uppercase tracking-[0.32em] text-[#E8D5A3]/70">Dress Code</span>
+                      <br />
+                      <span className="font-serif-display text-base italic text-[#FAF8F3]">{c.dressCode}</span>
+                    </span>
                   </li>
                 </ul>
 
-                <div className="mt-7 flex flex-wrap items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setDressFor(c)}
-                    className="inline-flex items-center gap-2 rounded-full border border-[#C9A84C]/50 px-5 py-2.5 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#E8D5A3] transition-all duration-500 hover:bg-[#C9A84C]/20 hover:shadow-[0_0_30px_-5px_rgba(201,168,76,0.4)] hover:border-[#C9A84C]/80"
-                  >
-                    <Shirt className="h-3.5 w-3.5" />
-                    Dress Code
-                  </button>
+                <div className="mt-7">
                   <a
                     href={c.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#C9A84C] via-[#E8D5A3] to-[#C9A84C] px-5 py-2.5 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#1C1C1C] shadow-[0_10px_30px_-10px_rgba(201,168,76,0.6)] transition-all duration-500 hover:scale-[1.04] hover:shadow-[0_0_30px_-2px_rgba(201,168,76,0.7)]"
+                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#E8D5A3] border-b border-[#C9A84C]/50 pb-1 hover:text-[#FFF3D6] hover:border-[#FFF3D6] transition-colors"
                   >
-                    <Navigation className="h-3.5 w-3.5" />
                     Get Direction
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
@@ -161,49 +144,6 @@ export function Ceremonies({ guest }: { guest: Guest }) {
           ))}
         </div>
       </div>
-
-      <AnimatePresence>
-        {dressFor ? (
-          <motion.div
-            className="fixed inset-0 z-[95] flex items-center justify-center p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setDressFor(null)}
-          >
-            <div className="absolute inset-0 bg-[#0A0907]/80 backdrop-blur-md" />
-            <motion.div
-              role="dialog"
-              aria-label="Dress code"
-              initial={{ opacity: 0, scale: 0.9, y: 20, filter: "blur(12px)" }}
-              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
-              className="glass-card-dark gold-border-glow relative w-full max-w-md rounded-3xl p-8 text-center text-[#FAF8F3]"
-            >
-              <button
-                onClick={() => setDressFor(null)}
-                aria-label="Close"
-                className="absolute right-4 top-4 rounded-full border border-[#C9A84C]/50 p-1.5 text-[#C9A84C] transition hover:bg-[#C9A84C]/15"
-              >
-                <X className="h-4 w-4" />
-              </button>
-              <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-full border border-[#C9A84C]/40 bg-[#C9A84C]/10">
-                <Shirt className="h-6 w-6 text-[#E8D5A3]" />
-              </div>
-              <p dir="rtl" className="font-arabic mt-4 text-xl text-[#E8D5A3]">{dressFor.arabic}</p>
-              <h3 className="font-serif-display mt-1 text-3xl">{dressFor.name} — Dress Code</h3>
-              <p className="font-serif-display mt-5 text-lg italic leading-relaxed text-[#FFF3D6]">
-                {dressFor.dressCode}
-              </p>
-              <p className="mt-3 font-sans-soft text-[10px] uppercase tracking-[0.4em] text-[#E8D5A3]/70">
-                Modesty observed · Hijab welcomed
-              </p>
-            </motion.div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </section>
   );
 }
