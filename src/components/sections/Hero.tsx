@@ -7,6 +7,7 @@ import { IslamicPattern } from "@/components/ornaments/IslamicPattern";
 import { Reveal } from "@/components/ornaments/Reveal";
 import { wedding } from "@/lib/wedding-data";
 import type { Guest } from "@/lib/guest";
+import heroBg from "@/assets/hero-bg.jpg";
 
 export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,6 +20,17 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
       id="hero"
       className="relative isolate flex min-h-[100svh] flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#0A1A3F] via-[#0E2A5C] to-[#06112B] text-[#EAF2FF]"
     >
+      {/* Background image — fully visible, never cropped */}
+      <img
+        src={heroBg}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-contain object-center opacity-25 sm:opacity-30"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-b from-[#06112B]/70 via-[#06112B]/40 to-[#06112B]/85"
+      />
       <IslamicPattern className="absolute inset-0 -z-10 opacity-[0.07]" />
       <div
         aria-hidden
@@ -77,11 +89,11 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
           </p>
         </Reveal>
 
-        {/* Dynamic guest name */}
+        {/* Dear Valued Guest */}
         <Reveal delay={0.2}>
           <div className="mt-12 inline-flex flex-col items-center">
             <span className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/70">
-              Dearest Guest
+              Dear Valued Guest
             </span>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -97,8 +109,14 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         </Reveal>
 
         <Reveal delay={0.4}>
+          <p className="mt-10 font-sans-soft text-xs uppercase tracking-[0.5em] text-[#E8D5A3]">
+            You Are Our Honored Guest
+          </p>
+        </Reveal>
+
+        <Reveal delay={0.6}>
           <p className="font-serif-display mx-auto mt-10 max-w-xl text-balance text-base italic leading-relaxed text-[#FAF8F3]/85 sm:text-lg">
-            You are cordially invited to celebrate the wedding of
+            You are cordially invited to the wedding celebration of
           </p>
         </Reveal>
 
@@ -107,46 +125,38 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
           initial={{ opacity: 0, y: 40, filter: "blur(18px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
-          transition={{ duration: 1.6, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1.6, delay: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="script-luxe mt-8 text-balance text-6xl leading-[1.05] sm:text-7xl md:text-8xl lg:text-[120px]"
         >
           {wedding.groom.name} &amp; {wedding.bride.name}
         </motion.h1>
 
-        <Reveal delay={0.9}>
+        <Reveal delay={1.2}>
           <p dir="rtl" lang="ar" className="font-arabic mt-4 text-xl text-[#E8D5A3] sm:text-2xl">
             {wedding.groom.arabic} &amp; {wedding.bride.arabic}
           </p>
         </Reveal>
 
-        <Reveal delay={1.0}>
+        <Reveal delay={1.4}>
           <ArabesqueDivider className="mt-8" />
         </Reveal>
 
-        {/* Quranic ayah */}
-        <Reveal delay={1.1}>
-          <p className="font-serif-display mx-auto mt-8 max-w-2xl text-balance text-base italic leading-relaxed text-[#FAF8F3]/80 sm:text-lg">
-            "And of His signs is that He created for you mates from among yourselves,
-            that you may find tranquility in them."
-          </p>
-          <p className="mt-2 font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/70">
-            — Qur'an 30:21
+        <Reveal delay={1.6}>
+          <p className="font-script mt-6 text-2xl text-[#FFF3D6] sm:text-3xl">
+            In Sha Allah
           </p>
         </Reveal>
 
-        <Reveal delay={1.3}>
+        <Reveal delay={1.8}>
           <div className="mt-10 grid grid-cols-2 items-center gap-x-10 gap-y-3 font-sans-soft text-[11px] uppercase tracking-[0.35em] text-[#E8D5A3]">
             <div className="text-right">{wedding.dateLabel}</div>
             <div className="text-left">{wedding.venue}</div>
           </div>
         </Reveal>
 
-        <Reveal delay={1.5}>
+        <Reveal delay={2.1}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <GoldButton onClick={onRsvp}>Accept Invitation</GoldButton>
-            <a href="#ceremonies">
-              <GoldButton variant="ghost-dark">View Events</GoldButton>
-            </a>
+            <GoldButton onClick={onRsvp}>Open Invitation</GoldButton>
           </div>
         </Reveal>
       </motion.div>
