@@ -2,14 +2,13 @@ import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import { SectionHeading } from "@/components/ornaments/SectionHeading";
 import { Reveal } from "@/components/ornaments/Reveal";
-import { GoldButton } from "@/components/ornaments/GoldButton";
 import { initialDuas } from "@/lib/wedding-data";
 import type { Guest } from "@/lib/guest";
 
 type Dua = { name: string; message: string };
 const MAX_WORDS = 100;
 
-export function DuaWall({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
+export function DuaWall({ guest }: { guest: Guest }) {
   const [duas, setDuas] = useState<Dua[]>(initialDuas);
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -90,9 +89,17 @@ export function DuaWall({ guest, onRsvp }: { guest: Guest; onRsvp: () => void })
               </div>
             </label>
             <div className="mt-6 flex justify-center">
-              <GoldButton type="submit" disabled={overLimit}>
-                Send your dua
-              </GoldButton>
+              <div className="relative">
+                <span aria-hidden className="luxe-cta-pulse-2" />
+                <button
+                  type="submit"
+                  disabled={overLimit}
+                  className="luxe-cta disabled:opacity-50 disabled:saturate-50"
+                  aria-label="Send your dua"
+                >
+                  <span className="luxe-cta-inner">Send Your Dua ✦</span>
+                </button>
+              </div>
             </div>
           </form>
         </Reveal>
@@ -114,20 +121,20 @@ export function DuaWall({ guest, onRsvp }: { guest: Guest; onRsvp: () => void })
                   key={i}
                   whileHover={{ scale: 1.06, rotate: 0 }}
                   style={{ marginTop: offset }}
-                  className="group relative flex h-60 w-60 shrink-0 flex-col items-center justify-center rounded-full p-7 text-center"
+                  className="group relative flex h-72 w-72 shrink-0 flex-col items-center justify-between overflow-hidden rounded-3xl p-6 text-center"
                 >
                   <span
                     aria-hidden
-                    className="absolute inset-0 rounded-full bg-gradient-to-br from-[#163C32]/80 to-[#0A1F1A]/80 backdrop-blur-md transition group-hover:from-[#285847]/90 group-hover:to-[#163C32]/90"
+                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#163C32]/80 to-[#0A1F1A]/80 backdrop-blur-md transition group-hover:from-[#285847]/90 group-hover:to-[#163C32]/90"
                   />
                   <span
                     aria-hidden
-                    className="absolute inset-0 rounded-full border border-[#C9A84C]/30 shadow-[inset_0_1px_0_rgba(255,243,214,0.18),0_18px_50px_-20px_rgba(201,168,76,0.4)] transition group-hover:border-[#C9A84C]/70 group-hover:shadow-[inset_0_1px_0_rgba(255,243,214,0.25),0_0_40px_-5px_rgba(201,168,76,0.55)]"
+                    className="absolute inset-0 rounded-3xl border border-[#C9A84C]/30 shadow-[inset_0_1px_0_rgba(255,243,214,0.18),0_18px_50px_-20px_rgba(201,168,76,0.4)] transition group-hover:border-[#C9A84C]/70 group-hover:shadow-[inset_0_1px_0_rgba(255,243,214,0.25),0_0_40px_-5px_rgba(201,168,76,0.55)]"
                   />
-                  <blockquote className="relative font-serif-display text-[13px] italic leading-snug text-[#FAF8F3]/90 line-clamp-5">
+                  <blockquote className="relative w-full overflow-hidden break-words font-serif-display text-[13px] italic leading-snug text-[#FAF8F3]/90 line-clamp-6 [overflow-wrap:anywhere]">
                     “{d.message}”
                   </blockquote>
-                  <figcaption className="relative mt-4 font-script text-lg text-[#E8D5A3]">
+                  <figcaption className="relative mt-3 font-script text-lg text-[#E8D5A3]">
                     {d.name}
                   </figcaption>
                 </motion.figure>
@@ -135,29 +142,6 @@ export function DuaWall({ guest, onRsvp }: { guest: Guest; onRsvp: () => void })
             })}
           </motion.div>
         </div>
-
-        {/* Accept Invitation — luxury CTA before Contact */}
-        <Reveal delay={0.2}>
-          <div className="mt-20 flex flex-col items-center text-center">
-            <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/80">
-              Your presence is our blessing
-            </p>
-            <p className="font-script mt-3 text-3xl text-[#FFF3D6] sm:text-4xl">
-              Will you join us?
-            </p>
-            <div className="relative mt-8">
-              <span aria-hidden className="luxe-cta-pulse-2" />
-              <button
-                type="button"
-                onClick={onRsvp}
-                className="luxe-cta"
-                aria-label="Accept Invitation"
-              >
-                <span className="luxe-cta-inner">Accept Invitation</span>
-              </button>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
