@@ -34,6 +34,55 @@ function Petals() {
   );
 }
 
+function Fireworks() {
+  // 6 burst origins distributed across the screen, each emitting sparks
+  const bursts = Array.from({ length: 7 }).map((_, b) => {
+    const top = 18 + Math.random() * 50;
+    const left = 8 + Math.random() * 84;
+    const delay = b * 0.55 + Math.random() * 0.4;
+    const color = b % 3 === 0 ? "rose" : b % 3 === 1 ? "emerald" : "";
+    const sparks = Array.from({ length: 18 }).map((_, s) => {
+      const angle = (s / 18) * Math.PI * 2;
+      const dist = 110 + Math.random() * 70;
+      return {
+        x: Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist,
+      };
+    });
+    return { top, left, delay, color, sparks };
+  });
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {bursts.map((b, bi) => (
+        <div
+          key={bi}
+          className="absolute"
+          style={{
+            top: `${b.top}%`,
+            left: `${b.left}%`,
+            animation: `firework-core 1.6s ease-out ${b.delay}s infinite`,
+          }}
+        >
+          <span className="firework firework-core" style={{ animationDelay: `${b.delay}s`, animationIterationCount: "infinite" as never, animationDuration: "2.6s" }} />
+          {b.sparks.map((s, si) => (
+            <span
+              key={si}
+              className={`firework firework-spark ${b.color}`}
+              style={{
+                animationDelay: `${b.delay}s`,
+                animationIterationCount: "infinite" as never,
+                animationDuration: "2.6s",
+                ["--fx-x" as never]: `${s.x}px`,
+                ["--fx-y" as never]: `${s.y}px`,
+              }}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function AcceptInvitation({ guest }: { guest: Guest }) {
   const [done, setDone] = useState(false);
 
@@ -112,6 +161,7 @@ export function AcceptInvitation({ guest }: { guest: Guest }) {
           >
             <div className="absolute inset-0 bg-[#06112B]/85 backdrop-blur-xl" />
             <Petals />
+            <Fireworks />
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 30, filter: "blur(14px)" }}
               animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
