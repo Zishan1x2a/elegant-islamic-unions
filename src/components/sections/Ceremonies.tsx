@@ -141,71 +141,56 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                     }`}
                   >
                     <article className="event-card">
-              <div
-                className="relative h-full overflow-hidden rounded-[1.4rem] p-5 sm:p-6 backdrop-blur-xl"
-                style={{
-                  background: cardBg[c.id] ?? cardBg.nikah,
-                  border: "1px solid rgba(201,168,76,0.45)",
-                  boxShadow:
-                    "0 1px 0 rgba(255,255,255,0.9) inset, 0 24px 60px -28px rgba(90,60,20,0.35), 0 8px 24px -16px rgba(120,90,40,0.25)",
-                }}
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -z-10"
-                  style={{
-                    background:
-                      "repeating-linear-gradient(45deg, rgba(201,168,76,0.10) 0 1px, transparent 1px 14px)",
-                    opacity: 0.6,
-                  }}
-                />
-                <div className="flex items-start justify-between">
+              <div className="story-card-luxe transition-transform duration-500 hover:-translate-y-1.5 hover:rotate-[-0.3deg]">
+                <div className="relative flex items-start justify-between">
                   <div>
                     <p dir="rtl" className="font-arabic text-lg text-[#8a6a1f]">
                       {c.arabic}
                     </p>
-                    <h3 className="font-script mt-0.5 text-3xl font-light tracking-tight text-[#3a2a14]">
+                    <h3 className="font-script mt-1 text-4xl font-light leading-none tracking-tight text-[#163C32]">
                       {c.name}
                     </h3>
                   </div>
-                  <div className="rounded-full border border-[#C9A84C]/60 bg-white/70 p-2 shadow-[0_4px_14px_-6px_rgba(120,90,40,0.35)]">
+                  <div className="rounded-full border border-[#C9A84C]/40 bg-white/80 p-2 shadow-[0_4px_14px_-6px_rgba(139,115,85,0.45)]">
                     <CeremonyIcon kind={c.icon} />
                   </div>
                 </div>
 
-                <ul className="mt-4 space-y-2 font-sans-soft text-[13px] text-[#3a2a14]/85">
+                <span aria-hidden className="relative mt-4 block h-px w-16 bg-gradient-to-r from-[#C9A84C] to-transparent" />
+
+                <ul className="relative mt-4 space-y-2 font-sans-soft text-[13px] text-[#3a2f25]">
                   <li className="flex items-center gap-2.5">
-                    <Calendar className="h-3.5 w-3.5 text-[#a8842c]" />
+                    <Calendar className="h-3.5 w-3.5 text-[#C9A84C]" />
                     <span>{c.date}</span>
                   </li>
                   <li className="flex items-center gap-2.5">
-                    <Clock className="h-3.5 w-3.5 text-[#a8842c]" />
+                    <Clock className="h-3.5 w-3.5 text-[#C9A84C]" />
                     <span>{c.time}</span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#a8842c]" />
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
                     <span>
-                      <span className="font-serif-display text-sm italic text-[#2a1d10]">{c.venue}</span>
+                      <span className="font-serif-display text-sm italic text-[#163C32]">{c.venue}</span>
                       <br />
-                      <span className="text-xs text-[#6b5230]/80">{c.address}</span>
+                      <span className="text-xs text-[#8B7355]">{c.address}</span>
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
-                    <Shirt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#a8842c]" />
+                    <Shirt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
                     <span>
-                      <span className="font-sans-soft text-[9px] uppercase tracking-[0.3em] text-[#8a6a1f]/80">Dress Code</span>
+                      <span className="font-sans-soft text-[9px] uppercase tracking-[0.3em] text-[#8B7355]">Dress Code</span>
                       <br />
-                      <span className="font-serif-display text-sm italic text-[#2a1d10]">{c.dressCode}</span>
+                      <span className="font-serif-display text-sm italic text-[#163C32]">{c.dressCode}</span>
                     </span>
                   </li>
                 </ul>
 
-                <div className="mt-5">
+                <div className="relative mt-5">
                   <a
                     href={c.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[10px] uppercase tracking-[0.3em] text-[#8a6a1f] border-b border-[#C9A84C]/60 pb-0.5 hover:text-[#5a3f10] hover:border-[#5a3f10] transition-colors"
+                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[10px] uppercase tracking-[0.3em] text-[#8B7355] border-b border-[#C9A84C]/60 pb-0.5 hover:text-[#163C32] hover:border-[#163C32] transition-colors"
                   >
                     Get Direction
                     <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
