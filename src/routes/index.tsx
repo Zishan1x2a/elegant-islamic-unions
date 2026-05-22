@@ -39,7 +39,7 @@ function Index() {
     { key: "story", label: "Our Story", node: <LoveStory /> },
     { key: "family", label: "Family", node: <Family /> },
     { key: "countdown", label: "Countdown", node: <Countdown /> },
-    { key: "blessings", label: "Blessings", node: <DuaWall /> },
+    { key: "blessings", label: "Blessings", node: <DuaWall guest={guest} onRsvp={() => setRsvpOpen(true)} /> },
     { key: "contact", label: "Contact", node: <Contact /> },
   ];
 

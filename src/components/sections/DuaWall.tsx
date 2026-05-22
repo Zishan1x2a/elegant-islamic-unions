@@ -4,26 +4,27 @@ import { SectionHeading } from "@/components/ornaments/SectionHeading";
 import { Reveal } from "@/components/ornaments/Reveal";
 import { GoldButton } from "@/components/ornaments/GoldButton";
 import { initialDuas } from "@/lib/wedding-data";
+import type { Guest } from "@/lib/guest";
 
 type Dua = { name: string; message: string };
 const MAX_WORDS = 100;
 
-export function DuaWall() {
+export function DuaWall({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
   const [duas, setDuas] = useState<Dua[]>(initialDuas);
-  const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const wordCount = message.trim() ? message.trim().split(/\s+/).length : 0;
   const overLimit = wordCount > MAX_WORDS;
 
+  const guestDisplay = `${guest.name}${guest.honorific ? " " + guest.honorific : ""}`.trim();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !message.trim() || overLimit) return;
+    if (!message.trim() || overLimit) return;
     // eslint-disable-next-line no-console
-    console.log("[mock] dua submitted:", { name, message });
-    setDuas((d) => [{ name, message }, ...d]);
-    setName("");
+    console.log("[mock] dua submitted:", { name: guestDisplay, message });
+    setDuas((d) => [{ name: guestDisplay, message }, ...d]);
     setMessage("");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
@@ -55,19 +56,15 @@ export function DuaWall() {
             onSubmit={handleSubmit}
             className="glass-card-dark gold-border-glow mx-auto mt-14 max-w-2xl rounded-3xl p-7 sm:p-9"
           >
-            <label className="block">
+            <div className="flex items-center justify-between gap-3">
               <span className="font-sans-soft text-[10px] uppercase tracking-[0.4em] text-[#E8D5A3]/80">
-                Your name
+                Sending as
               </span>
-              <input
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full name"
-                className="mt-2 w-full rounded-xl border border-[#C9A84C]/30 bg-[#0A0907]/40 px-4 py-3 font-serif-display text-lg text-[#FAF8F3] outline-none transition focus:border-[#C9A84C] focus:ring-2 focus:ring-[#C9A84C]/30"
-              />
-            </label>
-            <label className="mt-5 block">
+              <span className="font-script text-2xl text-[#FFF3D6]">
+                {guestDisplay}
+              </span>
+            </div>
+            <label className="mt-6 block">
               <span className="font-sans-soft text-[10px] uppercase tracking-[0.4em] text-[#E8D5A3]/80">
                 Your dua
               </span>
@@ -138,6 +135,29 @@ export function DuaWall() {
             })}
           </motion.div>
         </div>
+
+        {/* Accept Invitation — luxury CTA before Contact */}
+        <Reveal delay={0.2}>
+          <div className="mt-20 flex flex-col items-center text-center">
+            <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/80">
+              Your presence is our blessing
+            </p>
+            <p className="font-script mt-3 text-3xl text-[#FFF3D6] sm:text-4xl">
+              Will you join us?
+            </p>
+            <div className="relative mt-8">
+              <span aria-hidden className="luxe-cta-pulse-2" />
+              <button
+                type="button"
+                onClick={onRsvp}
+                className="luxe-cta"
+                aria-label="Accept Invitation"
+              >
+                <span className="luxe-cta-inner">Accept Invitation</span>
+              </button>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
