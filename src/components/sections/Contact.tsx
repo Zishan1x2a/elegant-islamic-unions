@@ -126,45 +126,6 @@ export function Contact() {
             );
           })}
         </div>
-
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {contacts.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <motion.a
-                key={c.label}
-                href={c.href}
-                target={c.href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-                initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                whileHover={{ y: -6, scale: 1.02 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className="group glass-card-dark gold-border-glow relative flex items-center gap-5 rounded-2xl p-6 transition-shadow hover:shadow-[0_0_50px_-10px_rgba(201,168,76,0.5)]"
-              >
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C] to-transparent"
-                />
-                <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 transition-all duration-500 group-hover:border-[#C9A84C] group-hover:shadow-[0_0_25px_rgba(201,168,76,0.45)] group-hover:rotate-6">
-                  <Icon className="h-5 w-5 text-[#E8D5A3]" />
-                </div>
-                <div className="min-w-0">
-                  <p dir="rtl" className="font-arabic text-sm text-[#C9A84C]">
-                    {c.arabic}
-                  </p>
-                  <p className="font-sans-soft text-[10px] uppercase tracking-[0.35em] text-[#E8D5A3]/70">
-                    {c.label}
-                  </p>
-                  <p className="font-serif-display mt-1 truncate text-lg text-[#FFF3D6]">
-                    {c.value}
-                  </p>
-                </div>
-              </motion.a>
-            );
-          })}
-        </div>
       </div>
     </section>
   );
