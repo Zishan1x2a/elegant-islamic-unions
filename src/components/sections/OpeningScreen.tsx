@@ -303,7 +303,7 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] anim-pulse-glow" />
                 <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]">
-                  Preview Guest
+                  Dear Valued Guest
                 </p>
               </div>
 
@@ -314,15 +314,25 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
                 {guest.name} {guest.honorific}
               </p>
 
+              <p
+                className="font-sans-soft anim-fade-up-luxe mt-4 text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/80"
+                style={{ animationDelay: "0.35s" }}
+              >
+                You Are Our Honored Guest
+              </p>
+
               <div className="anim-fade-up-luxe mt-10" style={{ animationDelay: "0.5s" }}>
                 <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/70">
-                  The wedding of
+                  You Are Cordially Invited To The Wedding Celebration Of
                 </p>
                 <h1 className="script-luxe mt-3 text-balance text-6xl leading-[1.05] sm:text-7xl md:text-8xl lg:text-[112px]">
                   {wedding.groom.name} &amp; {wedding.bride.name}
                 </h1>
                 <ArabesqueDivider className="mt-5" />
-                <p className="font-serif-display mt-3 text-lg italic text-[#E8D5A3]/90 sm:text-xl">
+                <p className="font-sans-soft mt-4 text-[11px] uppercase tracking-[0.55em] text-[#E8D5A3]">
+                  In Sha Allah
+                </p>
+                <p className="font-serif-display mt-2 text-lg italic text-[#E8D5A3]/90 sm:text-xl">
                   {wedding.dateLabel}
                 </p>
               </div>
