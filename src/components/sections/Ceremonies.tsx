@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Calendar, Clock, MapPin, Shirt, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { Calendar, Clock, MapPin, Shirt, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/ornaments/Reveal";
 import { ceremonies, type Ceremony } from "@/lib/wedding-data";
 import type { Guest } from "@/lib/guest";
@@ -45,24 +46,73 @@ function CeremonyIcon({ kind }: { kind: Ceremony["icon"] }) {
   );
 }
 
-// Rich per-event backgrounds matched to the ceremony's mood
-const cardBg: Record<string, string> = {
-  mehndi:
-    "radial-gradient(120% 120% at 0% 0%, rgba(255,210,190,0.55) 0%, rgba(250,225,205,0.5) 45%, rgba(252,244,232,0.95) 85%), linear-gradient(160deg,#fff5ec 0%,#fbeadd 100%)",
-  sangeet:
-    "radial-gradient(120% 120% at 100% 0%, rgba(220,200,250,0.5) 0%, rgba(240,225,200,0.45) 45%, rgba(252,247,238,0.95) 85%), linear-gradient(160deg,#f7f1ff 0%,#fbf3e6 100%)",
-  nikah:
-    "radial-gradient(120% 120% at 50% 0%, rgba(255,243,214,0.7) 0%, rgba(220,235,220,0.5) 45%, rgba(248,250,244,0.95) 85%), linear-gradient(160deg,#f4faf2 0%,#eef5ec 100%)",
-  walima:
-    "radial-gradient(120% 120% at 0% 100%, rgba(190,225,205,0.55) 0%, rgba(240,228,200,0.45) 45%, rgba(246,251,244,0.95) 85%), linear-gradient(160deg,#eff8f1 0%,#f7f1e3 100%)",
-  reception:
-    "radial-gradient(120% 120% at 100% 100%, rgba(230,210,180,0.6) 0%, rgba(245,232,210,0.5) 45%, rgba(252,246,236,0.95) 85%), linear-gradient(160deg,#fbf3e6 0%,#f5e8d0 100%)",
-  rukhsati:
-    "radial-gradient(120% 120% at 50% 100%, rgba(248,236,210,0.65) 0%, rgba(238,224,210,0.5) 45%, rgba(252,247,240,0.95) 85%), linear-gradient(160deg,#fdf6ea 0%,#f4e8da 100%)",
-};
+function CeremonyCard({ c }: { c: Ceremony }) {
+  return (
+    <div className="story-card-luxe h-full w-full">
+      <div className="relative flex items-start justify-between">
+        <div>
+          <p dir="rtl" className="font-arabic text-lg text-[#8a6a1f]">
+            {c.arabic}
+          </p>
+          <h3 className="font-script mt-1 text-4xl font-light leading-none tracking-tight text-[#163C32] sm:text-5xl">
+            {c.name}
+          </h3>
+        </div>
+        <div className="rounded-full border border-[#C9A84C]/40 bg-white/80 p-2 shadow-[0_4px_14px_-6px_rgba(139,115,85,0.45)]">
+          <CeremonyIcon kind={c.icon} />
+        </div>
+      </div>
+
+      <span aria-hidden className="relative mt-4 block h-px w-16 bg-gradient-to-r from-[#C9A84C] to-transparent" />
+
+      <ul className="relative mt-4 space-y-2 font-sans-soft text-[13px] text-[#3a2f25]">
+        <li className="flex items-center gap-2.5">
+          <Calendar className="h-3.5 w-3.5 text-[#C9A84C]" />
+          <span>{c.date}</span>
+        </li>
+        <li className="flex items-center gap-2.5">
+          <Clock className="h-3.5 w-3.5 text-[#C9A84C]" />
+          <span>{c.time}</span>
+        </li>
+        <li className="flex items-start gap-2.5">
+          <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
+          <span>
+            <span className="font-serif-display text-sm italic text-[#163C32]">{c.venue}</span>
+            <br />
+            <span className="text-xs text-[#8B7355]">{c.address}</span>
+          </span>
+        </li>
+        <li className="flex items-start gap-2.5">
+          <Shirt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
+          <span>
+            <span className="font-sans-soft text-[9px] uppercase tracking-[0.3em] text-[#8B7355]">Dress Code</span>
+            <br />
+            <span className="font-serif-display text-sm italic text-[#163C32]">{c.dressCode}</span>
+          </span>
+        </li>
+      </ul>
+
+      <div className="relative mt-5">
+        <a
+          href={c.mapsUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="group/link inline-flex items-center gap-2 font-sans-soft text-[10px] uppercase tracking-[0.3em] text-[#8B7355] border-b border-[#C9A84C]/60 pb-0.5 hover:text-[#163C32] hover:border-[#163C32] transition-colors"
+        >
+          Get Direction
+          <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export function Ceremonies({ guest }: { guest: Guest }) {
   const visible = ceremonies.filter((c) => c.id !== "nikah" || guest.nikahAccess);
+  const [active, setActive] = useState(0);
+  const n = visible.length;
+  const go = (dir: 1 | -1) => setActive((p) => (p + dir + n) % n);
+
   return (
     <section id="ceremonies" className="relative bg-gradient-to-b from-[#163C32] to-[#0F2A24] px-6 py-24 text-[#FAF8F3] sm:py-32">
       <div className="mx-auto max-w-6xl">
@@ -84,125 +134,125 @@ export function Ceremonies({ guest }: { guest: Guest }) {
           </Reveal>
         </div>
 
-        {/* Wave timeline (mirrors Our Story) */}
-        <div className="relative mt-20">
-          {/* Curved gold path (desktop) */}
-          <svg
+        {/* 3D coverflow carousel */}
+        <div
+          className="relative mt-16 flex items-center justify-center"
+          style={{ perspective: "1600px" }}
+        >
+          {/* Soft gold glow behind centered card */}
+          <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 top-0 hidden h-full w-full md:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 1000 1200"
-          >
-            <defs>
-              <linearGradient id="ceremoniesPath" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="#E8D5A3" stopOpacity="0" />
-                <stop offset="20%" stopColor="#E8D5A3" stopOpacity="0.7" />
-                <stop offset="80%" stopColor="#E8D5A3" stopOpacity="0.7" />
-                <stop offset="100%" stopColor="#E8D5A3" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M 500 0 C 200 200, 800 350, 500 520 C 200 690, 800 860, 500 1030 C 350 1110, 500 1180, 500 1200"
-              fill="none"
-              stroke="url(#ceremoniesPath)"
-              strokeWidth="1.5"
-              strokeDasharray="6 8"
-            />
-          </svg>
-          {/* Mobile vertical line */}
-          <span
-            aria-hidden
-            className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#E8D5A3]/50 to-transparent md:hidden"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+            style={{
+              background:
+                "radial-gradient(closest-side, rgba(232,213,163,0.35), rgba(201,168,76,0.15) 50%, transparent 75%)",
+            }}
           />
 
-          <ol className="space-y-14 md:space-y-20">
+          <div
+            className="relative h-[520px] w-full sm:h-[500px]"
+            style={{ transformStyle: "preserve-3d" }}
+            onTouchStart={(e) => ((e.currentTarget as any)._x = e.touches[0].clientX)}
+            onTouchEnd={(e) => {
+              const start = (e.currentTarget as any)._x as number | undefined;
+              if (start == null) return;
+              const dx = e.changedTouches[0].clientX - start;
+              if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+            }}
+          >
             {visible.map((c, i) => {
-              const isLeft = i % 2 === 0;
-              const waveOffset = isLeft ? "md:-translate-y-2" : "md:translate-y-10";
+              // signed offset (-n/2..n/2) so we wrap correctly
+              let off = i - active;
+              if (off > n / 2) off -= n;
+              if (off < -n / 2) off += n;
+              const abs = Math.abs(off);
+              const isActive = off === 0;
               return (
-                <li key={c.id} className="relative md:grid md:grid-cols-2 md:gap-16">
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.5 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    aria-hidden
-                    className="absolute left-6 top-2 -translate-x-1/2 md:left-1/2"
-                  >
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-[#FFF3D6] to-[#C9A84C] ring-4 ring-[#163C32] shadow-[0_0_18px_rgba(232,213,163,0.55)]">
-                      <div className="h-1.5 w-1.5 rounded-full bg-[#2B1B14]" />
-                    </div>
-                  </motion.div>
-
-                  <Reveal
-                    delay={i * 0.08}
-                    className={`pl-14 md:pl-0 ${waveOffset} ${
-                      isLeft ? "md:pr-16" : "md:col-start-2 md:pl-16"
-                    }`}
-                  >
-                    <article className="event-card">
-              <div className="story-card-luxe transition-transform duration-500 hover:-translate-y-1.5 hover:rotate-[-0.3deg]">
-                <div className="relative flex items-start justify-between">
-                  <div>
-                    <p dir="rtl" className="font-arabic text-lg text-[#8a6a1f]">
-                      {c.arabic}
-                    </p>
-                    <h3 className="font-script mt-1 text-4xl font-light leading-none tracking-tight text-[#163C32]">
-                      {c.name}
-                    </h3>
-                  </div>
-                  <div className="rounded-full border border-[#C9A84C]/40 bg-white/80 p-2 shadow-[0_4px_14px_-6px_rgba(139,115,85,0.45)]">
-                    <CeremonyIcon kind={c.icon} />
-                  </div>
-                </div>
-
-                <span aria-hidden className="relative mt-4 block h-px w-16 bg-gradient-to-r from-[#C9A84C] to-transparent" />
-
-                <ul className="relative mt-4 space-y-2 font-sans-soft text-[13px] text-[#3a2f25]">
-                  <li className="flex items-center gap-2.5">
-                    <Calendar className="h-3.5 w-3.5 text-[#C9A84C]" />
-                    <span>{c.date}</span>
-                  </li>
-                  <li className="flex items-center gap-2.5">
-                    <Clock className="h-3.5 w-3.5 text-[#C9A84C]" />
-                    <span>{c.time}</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
-                    <span>
-                      <span className="font-serif-display text-sm italic text-[#163C32]">{c.venue}</span>
-                      <br />
-                      <span className="text-xs text-[#8B7355]">{c.address}</span>
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <Shirt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
-                    <span>
-                      <span className="font-sans-soft text-[9px] uppercase tracking-[0.3em] text-[#8B7355]">Dress Code</span>
-                      <br />
-                      <span className="font-serif-display text-sm italic text-[#163C32]">{c.dressCode}</span>
-                    </span>
-                  </li>
-                </ul>
-
-                <div className="relative mt-5">
-                  <a
-                    href={c.mapsUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[10px] uppercase tracking-[0.3em] text-[#8B7355] border-b border-[#C9A84C]/60 pb-0.5 hover:text-[#163C32] hover:border-[#163C32] transition-colors"
-                  >
-                    Get Direction
-                    <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                  </a>
-                </div>
-              </div>
-                    </article>
-                  </Reveal>
-                </li>
+                <motion.button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-label={`Show ${c.name}`}
+                  aria-current={isActive}
+                  animate={{
+                    x: `calc(-50% + ${off * 56}%)`,
+                    rotateY: off * -28,
+                    scale: isActive ? 1 : 0.78 - Math.min(abs - 1, 1) * 0.08,
+                    opacity: abs > 2 ? 0 : isActive ? 1 : 0.55,
+                    zIndex: 50 - abs,
+                    filter: isActive ? "blur(0px)" : `blur(${Math.min(abs, 2)}px)`,
+                  }}
+                  transition={{ type: "spring", stiffness: 110, damping: 18, mass: 0.9 }}
+                  className="absolute left-1/2 top-1/2 w-[min(360px,86vw)] -translate-y-1/2 cursor-pointer text-left"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    pointerEvents: abs > 1 ? "none" : "auto",
+                  }}
+                >
+                  <CeremonyCard c={c} />
+                  {!isActive && (
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute inset-0 rounded-[1.5rem]"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(15,42,36,0.15), rgba(15,42,36,0.5))",
+                      }}
+                    />
+                  )}
+                </motion.button>
               );
             })}
-          </ol>
+          </div>
+
+          {/* Prev / Next */}
+          <button
+            type="button"
+            onClick={() => go(-1)}
+            aria-label="Previous ceremony"
+            className="luxe-nav-btn absolute left-2 top-1/2 z-[60] -translate-y-1/2 sm:left-6"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => go(1)}
+            aria-label="Next ceremony"
+            className="luxe-nav-btn absolute right-2 top-1/2 z-[60] -translate-y-1/2 sm:right-6"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Dots + label */}
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={visible[active]?.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.3 }}
+              className="font-sans-soft text-[11px] uppercase tracking-[0.4em] text-[#E8D5A3]/90"
+            >
+              {active + 1} / {n} · {visible[active]?.name}
+            </motion.p>
+          </AnimatePresence>
+          <div className="flex items-center gap-2">
+            {visible.map((c, i) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`Go to ${c.name}`}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === active
+                    ? "w-8 bg-gradient-to-r from-[#FFF3D6] to-[#C9A84C] shadow-[0_0_10px_rgba(232,213,163,0.6)]"
+                    : "w-2 bg-[#E8D5A3]/30 hover:bg-[#E8D5A3]/60"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
