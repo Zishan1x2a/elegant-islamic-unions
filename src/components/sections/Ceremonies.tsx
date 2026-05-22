@@ -84,16 +84,63 @@ export function Ceremonies({ guest }: { guest: Guest }) {
           </Reveal>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((c, i) => (
-            <motion.article
-              key={c.id}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.25 }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="event-card"
-            >
+        {/* Wave timeline (mirrors Our Story) */}
+        <div className="relative mt-20">
+          {/* Curved gold path (desktop) */}
+          <svg
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 hidden h-full w-full md:block"
+            preserveAspectRatio="none"
+            viewBox="0 0 1000 1200"
+          >
+            <defs>
+              <linearGradient id="ceremoniesPath" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stopColor="#E8D5A3" stopOpacity="0" />
+                <stop offset="20%" stopColor="#E8D5A3" stopOpacity="0.7" />
+                <stop offset="80%" stopColor="#E8D5A3" stopOpacity="0.7" />
+                <stop offset="100%" stopColor="#E8D5A3" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M 500 0 C 200 200, 800 350, 500 520 C 200 690, 800 860, 500 1030 C 350 1110, 500 1180, 500 1200"
+              fill="none"
+              stroke="url(#ceremoniesPath)"
+              strokeWidth="1.5"
+              strokeDasharray="6 8"
+            />
+          </svg>
+          {/* Mobile vertical line */}
+          <span
+            aria-hidden
+            className="absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-[#E8D5A3]/50 to-transparent md:hidden"
+          />
+
+          <ol className="space-y-14 md:space-y-20">
+            {visible.map((c, i) => {
+              const isLeft = i % 2 === 0;
+              const waveOffset = isLeft ? "md:-translate-y-2" : "md:translate-y-10";
+              return (
+                <li key={c.id} className="relative md:grid md:grid-cols-2 md:gap-16">
+                  <motion.div
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    aria-hidden
+                    className="absolute left-6 top-2 -translate-x-1/2 md:left-1/2"
+                  >
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-[#FFF3D6] to-[#C9A84C] ring-4 ring-[#163C32] shadow-[0_0_18px_rgba(232,213,163,0.55)]">
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#2B1B14]" />
+                    </div>
+                  </motion.div>
+
+                  <Reveal
+                    delay={i * 0.08}
+                    className={`pl-14 md:pl-0 ${waveOffset} ${
+                      isLeft ? "md:pr-16" : "md:col-start-2 md:pl-16"
+                    }`}
+                  >
+                    <article className="event-card">
               <div
                 className="relative h-full overflow-hidden rounded-[1.4rem] p-5 sm:p-6 backdrop-blur-xl"
                 style={{
@@ -165,8 +212,12 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                   </a>
                 </div>
               </div>
-            </motion.article>
-          ))}
+                    </article>
+                  </Reveal>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>
