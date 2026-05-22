@@ -60,7 +60,6 @@ function Fireworks() {
           style={{
             top: `${b.top}%`,
             left: `${b.left}%`,
-            animation: `firework-core 1.6s ease-out ${b.delay}s infinite`,
           }}
         >
           <span className="firework firework-core" style={{ animationDelay: `${b.delay}s`, animationIterationCount: "infinite" as never, animationDuration: "2.6s" }} />
