@@ -121,17 +121,17 @@ export function DuaWall({ guest }: { guest: Guest }) {
                   key={i}
                   whileHover={{ scale: 1.06, rotate: 0 }}
                   style={{ marginTop: offset }}
-                  className="group relative flex h-72 w-72 shrink-0 flex-col items-center justify-between overflow-hidden rounded-3xl p-6 text-center"
+                  className="group relative flex h-72 w-72 shrink-0 flex-col items-center justify-center overflow-hidden rounded-full p-8 text-center"
                 >
                   <span
                     aria-hidden
-                    className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#163C32]/80 to-[#0A1F1A]/80 backdrop-blur-md transition group-hover:from-[#285847]/90 group-hover:to-[#163C32]/90"
+                    className="absolute inset-0 rounded-full bg-gradient-to-br from-[#163C32]/80 to-[#0A1F1A]/80 backdrop-blur-md transition group-hover:from-[#285847]/90 group-hover:to-[#163C32]/90"
                   />
                   <span
                     aria-hidden
-                    className="absolute inset-0 rounded-3xl border border-[#C9A84C]/30 shadow-[inset_0_1px_0_rgba(255,243,214,0.18),0_18px_50px_-20px_rgba(201,168,76,0.4)] transition group-hover:border-[#C9A84C]/70 group-hover:shadow-[inset_0_1px_0_rgba(255,243,214,0.25),0_0_40px_-5px_rgba(201,168,76,0.55)]"
+                    className="absolute inset-0 rounded-full border border-[#C9A84C]/30 shadow-[inset_0_1px_0_rgba(255,243,214,0.18),0_18px_50px_-20px_rgba(201,168,76,0.4)] transition group-hover:border-[#C9A84C]/70 group-hover:shadow-[inset_0_1px_0_rgba(255,243,214,0.25),0_0_40px_-5px_rgba(201,168,76,0.55)]"
                   />
-                  <blockquote className="relative w-full overflow-hidden break-words font-serif-display text-[13px] italic leading-snug text-[#FAF8F3]/90 line-clamp-6 [overflow-wrap:anywhere]">
+                  <blockquote className="relative w-full overflow-hidden break-words font-serif-display text-[13px] italic leading-snug text-[#FAF8F3]/90 line-clamp-5 [overflow-wrap:anywhere]">
                     “{d.message}”
                   </blockquote>
                   <figcaption className="relative mt-3 font-script text-lg text-[#E8D5A3]">
