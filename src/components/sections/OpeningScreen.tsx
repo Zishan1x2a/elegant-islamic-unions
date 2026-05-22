@@ -1,6 +1,5 @@
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
-import { GoldButton } from "@/components/ornaments/GoldButton";
 import { ArabesqueDivider } from "@/components/ornaments/ArabesqueDivider";
 import mosqueImg from "@/assets/mosque-silhouette.jpg";
 import type { Guest } from "@/lib/guest";
@@ -92,16 +91,23 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
       )}
 
       {/* === Scene 4: Mosque silhouette (fades in later) === */}
-      <motion.img
-        src={mosqueImg}
-        alt=""
+      <motion.div
         aria-hidden
-        initial={{ opacity: 0, y: 60, scale: 1.1 }}
-        animate={scene >= 3 ? { opacity: 0.35, y: 0, scale: 1 } : {}}
+        initial={{ opacity: 0, y: 60, scale: 1.05 }}
+        animate={scene >= 3 ? { opacity: 1, y: 0, scale: 1 } : {}}
         transition={{ duration: 2.4, ease: EASE }}
-        className="absolute inset-x-0 bottom-0 h-[60vh] w-full object-cover object-bottom mix-blend-screen"
-        style={{ filter: "blur(0.5px) brightness(0.7)" }}
-      />
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[55vh] w-full"
+      >
+        <img
+          src={mosqueImg}
+          alt=""
+          className="absolute inset-0 h-full w-full object-contain object-bottom mix-blend-screen opacity-40"
+          style={{ filter: "blur(0.4px) brightness(0.75)" }}
+        />
+        {/* soft fade to blend the silhouette into the backdrop */}
+        <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-[#040A1C] to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#040A1C] via-[#040A1C]/70 to-transparent" />
+      </motion.div>
 
       {/* === Scene 4: Crescent moon === */}
       <AnimatePresence>
@@ -297,12 +303,14 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
               transition={{ duration: 1, ease: EASE }}
               className="flex flex-col items-center"
             >
-              <p
-                className="font-script anim-fade-up-luxe text-3xl text-[#FFF3D6] sm:text-4xl"
-                style={{ animationDelay: "0.25s" }}
+              <motion.p
+                initial={{ opacity: 0, y: 24, filter: "blur(10px)", letterSpacing: "0.25em" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)", letterSpacing: "0em" }}
+                transition={{ duration: 1.6, ease: EASE, delay: 0.25 }}
+                className="font-script royal-shimmer-text royal-glow-pulse text-4xl sm:text-5xl md:text-6xl"
               >
                 Dear Valued Guest
-              </p>
+              </motion.p>
 
               <p
                 className="font-sans-soft anim-fade-up-luxe mt-4 text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/80"
@@ -327,9 +335,21 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
                 </p>
               </div>
 
-              <div className="anim-fade-up-luxe mt-10" style={{ animationDelay: "0.85s" }}>
-                <GoldButton onClick={onOpen}>Open Invitation</GoldButton>
-                <p className="mt-4 font-sans-soft text-[10px] uppercase tracking-[0.45em] text-[#E8D5A3]/60">
+              <div className="anim-fade-up-luxe mt-10 flex flex-col items-center" style={{ animationDelay: "0.85s" }}>
+                <button
+                  type="button"
+                  onClick={onOpen}
+                  className="luxe-cta group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFF3D6] focus-visible:ring-offset-4 focus-visible:ring-offset-[#040A1C]"
+                  aria-label="Open Invitation"
+                >
+                  <span className="luxe-cta-pulse-2" aria-hidden />
+                  <span className="luxe-cta-inner">
+                    <span aria-hidden className="text-[14px] leading-none">✦</span>
+                    <span>Open Invitation</span>
+                    <span aria-hidden className="text-[14px] leading-none">✦</span>
+                  </span>
+                </button>
+                <p className="mt-5 font-sans-soft text-[10px] uppercase tracking-[0.45em] text-[#E8D5A3]/70">
                   Tap to enter
                 </p>
               </div>
