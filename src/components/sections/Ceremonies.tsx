@@ -84,7 +84,7 @@ export function Ceremonies({ guest }: { guest: Guest }) {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-7 sm:grid-cols-2">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((c, i) => (
             <motion.article
               key={c.id}
@@ -95,7 +95,7 @@ export function Ceremonies({ guest }: { guest: Guest }) {
               className="event-card"
             >
               <div
-                className="relative overflow-hidden rounded-[1.6rem] p-7 sm:p-9 backdrop-blur-xl"
+                className="relative h-full overflow-hidden rounded-[1.4rem] p-5 sm:p-6 backdrop-blur-xl"
                 style={{
                   background: cardBg[c.id] ?? cardBg.nikah,
                   border: "1px solid rgba(201,168,76,0.45)",
@@ -114,54 +114,54 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                 />
                 <div className="flex items-start justify-between">
                   <div>
-                    <p dir="rtl" className="font-arabic text-2xl text-[#8a6a1f]">
+                    <p dir="rtl" className="font-arabic text-lg text-[#8a6a1f]">
                       {c.arabic}
                     </p>
-                    <h3 className="font-script mt-1 text-5xl font-light tracking-tight text-[#3a2a14]">
+                    <h3 className="font-script mt-0.5 text-3xl font-light tracking-tight text-[#3a2a14]">
                       {c.name}
                     </h3>
                   </div>
-                  <div className="rounded-full border border-[#C9A84C]/60 bg-white/70 p-3 shadow-[0_4px_14px_-6px_rgba(120,90,40,0.35)]">
+                  <div className="rounded-full border border-[#C9A84C]/60 bg-white/70 p-2 shadow-[0_4px_14px_-6px_rgba(120,90,40,0.35)]">
                     <CeremonyIcon kind={c.icon} />
                   </div>
                 </div>
 
-                <ul className="mt-6 space-y-3 font-sans-soft text-sm text-[#3a2a14]/85">
-                  <li className="flex items-center gap-3">
-                    <Calendar className="h-4 w-4 text-[#a8842c]" />
+                <ul className="mt-4 space-y-2 font-sans-soft text-[13px] text-[#3a2a14]/85">
+                  <li className="flex items-center gap-2.5">
+                    <Calendar className="h-3.5 w-3.5 text-[#a8842c]" />
                     <span>{c.date}</span>
                   </li>
-                  <li className="flex items-center gap-3">
-                    <Clock className="h-4 w-4 text-[#a8842c]" />
+                  <li className="flex items-center gap-2.5">
+                    <Clock className="h-3.5 w-3.5 text-[#a8842c]" />
                     <span>{c.time}</span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#a8842c]" />
+                  <li className="flex items-start gap-2.5">
+                    <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#a8842c]" />
                     <span>
-                      <span className="font-serif-display text-base italic text-[#2a1d10]">{c.venue}</span>
+                      <span className="font-serif-display text-sm italic text-[#2a1d10]">{c.venue}</span>
                       <br />
-                      <span className="text-[#6b5230]/80">{c.address}</span>
+                      <span className="text-xs text-[#6b5230]/80">{c.address}</span>
                     </span>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <Shirt className="mt-0.5 h-4 w-4 shrink-0 text-[#a8842c]" />
+                  <li className="flex items-start gap-2.5">
+                    <Shirt className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#a8842c]" />
                     <span>
-                      <span className="font-sans-soft text-[10px] uppercase tracking-[0.32em] text-[#8a6a1f]/80">Dress Code</span>
+                      <span className="font-sans-soft text-[9px] uppercase tracking-[0.3em] text-[#8a6a1f]/80">Dress Code</span>
                       <br />
-                      <span className="font-serif-display text-base italic text-[#2a1d10]">{c.dressCode}</span>
+                      <span className="font-serif-display text-sm italic text-[#2a1d10]">{c.dressCode}</span>
                     </span>
                   </li>
                 </ul>
 
-                <div className="mt-7">
+                <div className="mt-5">
                   <a
                     href={c.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#8a6a1f] border-b border-[#C9A84C]/60 pb-1 hover:text-[#5a3f10] hover:border-[#5a3f10] transition-colors"
+                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[10px] uppercase tracking-[0.3em] text-[#8a6a1f] border-b border-[#C9A84C]/60 pb-0.5 hover:text-[#5a3f10] hover:border-[#5a3f10] transition-colors"
                   >
                     Get Direction
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                   </a>
                 </div>
               </div>
