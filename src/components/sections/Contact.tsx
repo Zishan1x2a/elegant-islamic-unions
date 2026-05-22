@@ -37,44 +37,6 @@ const familyContacts = [
   },
 ];
 
-const contacts = [
-  {
-    icon: Phone,
-    label: "Wedding Desk",
-    value: "+971 50 000 0000",
-    href: "tel:+971500000000",
-    arabic: "اِتَّصِل بِنَا",
-  },
-  {
-    icon: MessageCircle,
-    label: "WhatsApp",
-    value: "Chat with us",
-    href: "https://wa.me/971500000000",
-    arabic: "وَاتْسَاب",
-  },
-  {
-    icon: Mail,
-    label: "Email",
-    value: "rsvp@ahmadaisha.love",
-    href: "mailto:rsvp@ahmadaisha.love",
-    arabic: "بَرِيد",
-  },
-  {
-    icon: MapPin,
-    label: "Venue",
-    value: wedding.venue,
-    href: "https://maps.google.com/?q=Downtown+Dubai",
-    arabic: "العُنْوَان",
-  },
-  {
-    icon: Instagram,
-    label: "Follow Our Story",
-    value: wedding.hashtag,
-    href: `https://instagram.com/explore/tags/${wedding.hashtag.replace("#", "")}`,
-    arabic: "إِنْسْتَغْرَام",
-  },
-];
-
 export function Contact() {
   return (
     <section
