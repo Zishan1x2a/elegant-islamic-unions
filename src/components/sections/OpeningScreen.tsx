@@ -257,22 +257,32 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
           {scene >= 4 && (
             <motion.div
               key="bism"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, top: "50%", y: "-50%" }}
+              animate={
+                scene >= 5
+                  ? { opacity: 1, top: "6%", y: "0%" }
+                  : { opacity: 1, top: "50%", y: "-50%" }
+              }
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 1.2, ease: EASE }}
-              className="absolute inset-x-0 top-1/2 -translate-y-1/2"
+              className="absolute inset-x-0"
             >
               <p
                 dir="rtl"
                 lang="ar"
-                className="font-arabic gold-shimmer anim-blur-focus text-3xl sm:text-5xl md:text-6xl"
+                className={`font-arabic gold-shimmer anim-blur-focus transition-all duration-700 ${
+                  scene >= 5
+                    ? "text-xl sm:text-2xl md:text-3xl"
+                    : "text-3xl sm:text-5xl md:text-6xl"
+                }`}
               >
                 بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
               </p>
-              <p className="font-sans-soft mt-6 text-[10px] uppercase tracking-[0.55em] text-[#E8D5A3]/70">
-                In the name of Allah, the Most Gracious, the Most Merciful
-              </p>
+              {scene < 5 && (
+                <p className="font-sans-soft mt-6 text-[10px] uppercase tracking-[0.55em] text-[#E8D5A3]/70">
+                  In the name of Allah, the Most Gracious, the Most Merciful
+                </p>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
