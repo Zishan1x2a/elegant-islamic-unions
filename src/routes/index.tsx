@@ -10,7 +10,7 @@ import { Ceremonies } from "@/components/sections/Ceremonies";
 import { Family } from "@/components/sections/Family";
 import { Countdown } from "@/components/sections/Countdown";
 import { DuaWall } from "@/components/sections/DuaWall";
-import { Rsvp } from "@/components/sections/Rsvp";
+import { AcceptInvitation } from "@/components/sections/AcceptInvitation";
 import { Contact } from "@/components/sections/Contact";
 import { AudioPlayer } from "@/components/ornaments/AudioPlayer";
 import { CursorGlow } from "@/components/ornaments/CursorGlow";
@@ -21,7 +21,6 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [opening, setOpening] = useState(true);
-  const [rsvpOpen, setRsvpOpen] = useState(false);
   const [guest] = useState(() => readGuestFromUrl());
   const [sceneIdx, setSceneIdx] = useState(0);
   const [dir, setDir] = useState(1);
@@ -34,12 +33,13 @@ function Index() {
   }, []);
 
   const scenes: { key: string; label: string; node: ReactNode }[] = [
-    { key: "hero", label: "Welcome", node: <Hero guest={guest} onRsvp={() => setRsvpOpen(true)} /> },
+    { key: "hero", label: "Welcome", node: <Hero guest={guest} onRsvp={() => go(scenes.findIndex((s) => s.key === "rsvp"))} /> },
     { key: "events", label: "Events", node: <Ceremonies guest={guest} /> },
     { key: "story", label: "Our Story", node: <LoveStory /> },
     { key: "family", label: "Family", node: <Family /> },
     { key: "countdown", label: "Countdown", node: <Countdown /> },
-    { key: "blessings", label: "Blessings", node: <DuaWall guest={guest} onRsvp={() => setRsvpOpen(true)} /> },
+    { key: "blessings", label: "Blessings", node: <DuaWall guest={guest} /> },
+    { key: "rsvp", label: "RSVP", node: <AcceptInvitation guest={guest} /> },
     { key: "contact", label: "Contact", node: <Contact /> },
   ];
 
@@ -101,8 +101,6 @@ function Index() {
       </div>
       )}
 
-      <Rsvp open={rsvpOpen} setOpen={setRsvpOpen} guest={guest} />
-
       <AudioPlayer />
     </main>
   );
@@ -127,9 +125,7 @@ function SceneNavButton({
       disabled={disabled}
       whileHover={{ scale: disabled ? 1 : 1.06 }}
       whileTap={{ scale: disabled ? 1 : 0.96 }}
-      className={`pointer-events-auto group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/60 px-5 py-3 font-sans-soft text-[10px] uppercase tracking-[0.4em] text-[#FFF3D6] backdrop-blur-xl transition-all duration-500 hover:border-[#C9A84C] hover:shadow-[0_0_30px_rgba(201,168,76,0.5)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none ${
-        side === "right" ? "flex-row-reverse" : ""
-      }`}
+      className={`pointer-events-auto luxe-nav-btn ${side === "right" ? "flex-row-reverse" : ""}`}
       aria-label={label}
     >
       <span className="relative z-10 flex items-center gap-2">
@@ -137,10 +133,6 @@ function SceneNavButton({
         <span>{label}</span>
         {side === "right" ? icon : null}
       </span>
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent transition-transform duration-1000 group-hover:translate-x-full"
-      />
     </motion.button>
   );
 }
