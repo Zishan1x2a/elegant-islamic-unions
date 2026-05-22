@@ -138,6 +138,19 @@ export const ceremonies: Ceremony[] = [
     mapsUrl: "https://maps.google.com/?q=Burj+Khalifa+Dubai",
     accent: "oud",
   },
+  {
+    id: "rukhsati",
+    name: "Rukhsati",
+    arabic: "الرُّخْصَتِي",
+    icon: "rings",
+    date: "Sunday, 15 November 2026",
+    time: "11:00 PM",
+    venue: "Al-Bayt Royal Hall — Farewell Court",
+    address: "Downtown Dubai",
+    dressCode: "Soft pastels · Pearl & Ivory",
+    mapsUrl: "https://maps.google.com/?q=Downtown+Dubai",
+    accent: "gold",
+  },
 ];
 
 export const families = [
