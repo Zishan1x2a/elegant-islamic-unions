@@ -12,6 +12,7 @@ import { Countdown } from "@/components/sections/Countdown";
 import { DuaWall } from "@/components/sections/DuaWall";
 import { Rsvp } from "@/components/sections/Rsvp";
 import { Footer } from "@/components/sections/Footer";
+import { Contact } from "@/components/sections/Contact";
 import { AudioPlayer } from "@/components/ornaments/AudioPlayer";
 import { CursorGlow } from "@/components/ornaments/CursorGlow";
 import { ScrollProgress } from "@/components/ornaments/ScrollProgress";
@@ -52,6 +53,7 @@ function Index() {
       <Countdown />
       <DuaWall />
       <Rsvp open={rsvpOpen} setOpen={setRsvpOpen} guest={guest} />
+      <Contact />
       <Footer />
 
       <AudioPlayer />
