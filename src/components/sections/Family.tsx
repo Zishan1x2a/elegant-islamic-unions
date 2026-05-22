@@ -10,7 +10,7 @@ export function Family() {
   return (
     <section
       id="family"
-      className="relative overflow-hidden bg-transparent px-6 py-24 text-[#FAF8F3] sm:py-32"
+      className="relative overflow-hidden bg-gradient-to-b from-[#0A1F1A] to-[#0F2A24] px-6 py-24 text-[#FAF8F3] sm:py-32"
     >
       <div className="mx-auto max-w-6xl">
         <SectionHeading

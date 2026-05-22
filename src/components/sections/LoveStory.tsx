@@ -6,16 +6,17 @@ import { timeline } from "@/lib/wedding-data";
 export function LoveStory() {
   return (
     <section id="story" className="relative overflow-hidden px-6 py-24 sm:py-32">
-      {/* Subtle gold glow over global navy backdrop */}
+      {/* Luxury layered background */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-[#FAF6EC] via-[#F5EBD3] to-[#EFE2C0]" />
       <div
         aria-hidden
         className="absolute inset-0 -z-10 opacity-50"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 10%, rgba(232,213,163,0.18), transparent 45%), radial-gradient(circle at 80% 80%, rgba(201,168,76,0.14), transparent 50%)",
+            "radial-gradient(circle at 20% 10%, rgba(232,213,163,0.55), transparent 45%), radial-gradient(circle at 80% 80%, rgba(201,168,76,0.35), transparent 50%)",
         }}
       />
-      <IslamicPattern className="absolute inset-0 -z-0" opacity={0.06} />
+      <IslamicPattern className="absolute inset-0 -z-0" opacity={0.08} />
       <div className="relative mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>

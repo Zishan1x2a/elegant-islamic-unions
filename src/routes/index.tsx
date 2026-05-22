@@ -14,7 +14,6 @@ import { Rsvp } from "@/components/sections/Rsvp";
 import { Contact } from "@/components/sections/Contact";
 import { AudioPlayer } from "@/components/ornaments/AudioPlayer";
 import { CursorGlow } from "@/components/ornaments/CursorGlow";
-import { FloatingParticles } from "@/components/ornaments/FloatingParticles";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -51,21 +50,7 @@ function Index() {
   };
 
   return (
-    <main className="relative h-[100svh] w-full overflow-hidden bg-[#1B3A6B]">
-      {/* Global light-navy backdrop + drifting particles behind all scenes */}
-      {!opening && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1E3F75] via-[#22468A] to-[#1B3A6B]" />
-          <div
-            className="absolute inset-0 opacity-70"
-            style={{
-              background:
-                "radial-gradient(circle at 20% 25%, rgba(147,197,253,0.20), transparent 55%), radial-gradient(circle at 80% 75%, rgba(96,165,250,0.18), transparent 60%)",
-            }}
-          />
-          <FloatingParticles count={60} />
-        </div>
-      )}
+    <main className="relative h-[100svh] w-full overflow-hidden bg-[#06112B]">
       <AnimatePresence mode="wait">
         {opening && (
           <OpeningScreen guest={guest} onOpen={() => setOpening(false)} />
@@ -75,7 +60,7 @@ function Index() {
       <CursorGlow />
 
       {!opening && (
-      <div className="relative z-10 h-full w-full">
+      <div className="relative h-full w-full">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.section
             key={scenes[sceneIdx].key}

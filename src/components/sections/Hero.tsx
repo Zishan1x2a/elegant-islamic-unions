@@ -17,7 +17,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
     <section
       ref={ref}
       id="hero"
-      className="relative isolate flex min-h-[100svh] flex-col items-center justify-start overflow-hidden bg-transparent text-[#EAF2FF]"
+      className="relative isolate flex min-h-[100svh] flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#0A1A3F] via-[#0E2A5C] to-[#06112B] text-[#EAF2FF]"
     >
       <IslamicPattern className="absolute inset-0 -z-10 opacity-[0.07]" />
       <div

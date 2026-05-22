@@ -33,7 +33,7 @@ export function DuaWall() {
   const loop = [...duas, ...duas];
 
   return (
-    <section id="duas" className="relative overflow-hidden bg-transparent px-6 py-24 text-[#FAF8F3] sm:py-32">
+    <section id="duas" className="relative overflow-hidden bg-[#0A1F1A] px-6 py-24 text-[#FAF8F3] sm:py-32">
       <div
         aria-hidden
         className="anim-ambient-drift absolute inset-0"
@@ -102,8 +102,8 @@ export function DuaWall() {
 
         {/* Circular floating dua bubbles — infinite marquee */}
         <div className="relative mt-16 overflow-hidden py-6">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#1B3A6B] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#1B3A6B] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0A1F1A] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0A1F1A] to-transparent" />
 
           <motion.div
             className="flex w-max gap-8"
