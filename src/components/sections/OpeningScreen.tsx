@@ -47,10 +47,10 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
 
   return (
     <motion.div
-      className="fixed inset-0 z-[80] overflow-hidden bg-[#05050A]"
+      className="fixed inset-0 z-[80] overflow-hidden bg-[#040A1C]"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, filter: "blur(24px)", scale: 1.04 }}
-      transition={{ duration: 1.3, ease: EASE }}
+      exit={{ opacity: 0, filter: "blur(24px)", scale: 1.04, pointerEvents: "none" }}
+      transition={{ duration: 0.8, ease: EASE }}
     >
       {/* === Scene 1: Ambient dark backdrop === */}
       <div className="absolute inset-0">

@@ -17,7 +17,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
     <section
       ref={ref}
       id="hero"
-      className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden bg-gradient-to-b from-[#163C32] via-[#0F2A24] to-[#0A1F1A] text-[#FAF8F3]"
+      className="relative isolate flex min-h-[100svh] flex-col items-center justify-start overflow-hidden bg-gradient-to-b from-[#0A1A3F] via-[#0E2A5C] to-[#06112B] text-[#EAF2FF]"
     >
       <IslamicPattern className="absolute inset-0 -z-10 opacity-[0.07]" />
       <div
@@ -25,7 +25,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         className="anim-ambient-drift absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(circle at 20% 30%, rgba(201,168,76,0.20), transparent 55%), radial-gradient(circle at 80% 70%, rgba(40,88,71,0.55), transparent 60%)",
+            "radial-gradient(circle at 20% 30%, rgba(147,197,253,0.22), transparent 55%), radial-gradient(circle at 80% 70%, rgba(59,130,246,0.35), transparent 60%)",
         }}
       />
       <div className="vignette absolute inset-0 -z-10" />
@@ -37,7 +37,7 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
         className="anim-pulse-glow pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[65vmin] w-[65vmin] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(201,168,76,0.30) 0%, rgba(201,168,76,0.08) 40%, transparent 70%)",
+            "radial-gradient(circle, rgba(147,197,253,0.30) 0%, rgba(59,130,246,0.10) 40%, transparent 70%)",
         }}
       />
 
@@ -65,14 +65,14 @@ export function Hero({ guest, onRsvp }: { guest: Guest; onRsvp: () => void }) {
 
       <motion.div
         style={{ opacity }}
-        className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 py-24 text-center"
+        className="relative mx-auto flex w-full max-w-5xl flex-col items-center px-6 pt-10 pb-24 text-center sm:pt-14"
       >
-        {/* Bismillah */}
+        {/* Bismillah — pinned at the very top */}
         <Reveal>
           <p dir="rtl" lang="ar" className="font-arabic gold-shimmer text-3xl sm:text-4xl md:text-5xl">
             بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
           </p>
-          <p className="mt-3 font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]/75">
+          <p className="mt-3 font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#93C5FD]/80">
             Bismillah-ir-Rahman-ir-Raheem
           </p>
         </Reveal>
