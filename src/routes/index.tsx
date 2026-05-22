@@ -50,8 +50,8 @@ function Index() {
   };
 
   return (
-    <main className="relative h-[100svh] w-full overflow-hidden bg-[#0A1F1A]">
-      <AnimatePresence>
+    <main className="relative h-[100svh] w-full overflow-hidden bg-[#06112B]">
+      <AnimatePresence mode="wait">
         {opening && (
           <OpeningScreen guest={guest} onOpen={() => setOpening(false)} />
         )}
@@ -59,6 +59,7 @@ function Index() {
 
       <CursorGlow />
 
+      {!opening && (
       <div className="relative h-full w-full">
         <AnimatePresence mode="wait" custom={dir}>
           <motion.section
@@ -98,6 +99,7 @@ function Index() {
           </motion.section>
         </AnimatePresence>
       </div>
+      )}
 
       <Rsvp open={rsvpOpen} setOpen={setRsvpOpen} guest={guest} />
 
