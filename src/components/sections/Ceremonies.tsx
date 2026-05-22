@@ -55,7 +55,7 @@ const accentBg: Record<Ceremony["accent"], string> = {
 export function Ceremonies({ guest }: { guest: Guest }) {
   const visible = ceremonies.filter((c) => c.id !== "nikah" || guest.nikahAccess);
   return (
-    <section id="ceremonies" className="relative bg-gradient-to-b from-[#163C32] to-[#0F2A24] px-6 py-24 text-[#FAF8F3] sm:py-32">
+    <section id="ceremonies" className="relative bg-transparent px-6 py-24 text-[#FAF8F3] sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <Reveal>
