@@ -45,11 +45,20 @@ function CeremonyIcon({ kind }: { kind: Ceremony["icon"] }) {
   );
 }
 
-const accentBg: Record<Ceremony["accent"], string> = {
-  gold: "from-[#E8D5A3]/30 to-[#C9A84C]/10",
-  emerald: "from-[#285847]/15 to-[#163C32]/5",
-  rose: "from-[#B85042]/15 to-[#E8D5A3]/10",
-  oud: "from-[#2B1B14]/15 to-[#8B7355]/10",
+// Rich per-event backgrounds matched to the ceremony's mood
+const cardBg: Record<string, string> = {
+  mehndi:
+    "radial-gradient(120% 120% at 0% 0%, rgba(232,107,90,0.35) 0%, rgba(184,80,66,0.25) 35%, rgba(43,27,20,0.85) 75%), linear-gradient(160deg,#3a1410 0%,#1a0907 100%)",
+  sangeet:
+    "radial-gradient(120% 120% at 100% 0%, rgba(168,85,247,0.28) 0%, rgba(201,168,76,0.18) 40%, rgba(43,27,20,0.85) 80%), linear-gradient(160deg,#1f0f2a 0%,#0c0712 100%)",
+  nikah:
+    "radial-gradient(120% 120% at 50% 0%, rgba(255,243,214,0.35) 0%, rgba(201,168,76,0.22) 40%, rgba(22,60,50,0.85) 80%), linear-gradient(160deg,#1d2d20 0%,#0a1410 100%)",
+  walima:
+    "radial-gradient(120% 120% at 0% 100%, rgba(40,88,71,0.45) 0%, rgba(201,168,76,0.18) 45%, rgba(22,60,50,0.9) 85%), linear-gradient(160deg,#0f2a22 0%,#06120e 100%)",
+  reception:
+    "radial-gradient(120% 120% at 100% 100%, rgba(139,115,85,0.4) 0%, rgba(43,27,20,0.6) 40%, rgba(10,9,7,0.95) 85%), linear-gradient(160deg,#2a1d14 0%,#0a0907 100%)",
+  rukhsati:
+    "radial-gradient(120% 120% at 50% 100%, rgba(232,213,163,0.35) 0%, rgba(201,168,76,0.18) 40%, rgba(31,22,18,0.92) 85%), linear-gradient(160deg,#241814 0%,#0a0907 100%)",
 };
 
 export function Ceremonies({ guest }: { guest: Guest }) {
@@ -85,8 +94,22 @@ export function Ceremonies({ guest }: { guest: Guest }) {
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="event-card"
             >
-              <div className="glass-card-dark relative rounded-[1.6rem] p-7 sm:p-9">
-                <div aria-hidden className={`absolute inset-0 -z-10 rounded-[1.6rem] bg-gradient-to-br ${accentBg[c.accent]} opacity-60`} />
+              <div
+                className="relative overflow-hidden rounded-[1.6rem] p-7 sm:p-9 backdrop-blur-xl"
+                style={{
+                  background: cardBg[c.id] ?? cardBg.nikah,
+                  border: "1px solid rgba(201,168,76,0.30)",
+                }}
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -z-10"
+                  style={{
+                    background:
+                      "repeating-linear-gradient(45deg, rgba(201,168,76,0.06) 0 2px, transparent 2px 14px)",
+                    opacity: 0.5,
+                  }}
+                />
                 <div className="flex items-start justify-between">
                   <div>
                     <p dir="rtl" className="font-arabic text-2xl text-[#E8D5A3]">
