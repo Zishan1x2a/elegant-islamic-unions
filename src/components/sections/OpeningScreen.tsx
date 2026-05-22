@@ -297,16 +297,6 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
               transition={{ duration: 1, ease: EASE }}
               className="flex flex-col items-center"
             >
-              <div
-                className="anim-fade-up-luxe mb-8 inline-flex items-center gap-3 rounded-full border border-[#D4AF37]/40 bg-[#D4AF37]/5 px-5 py-2 backdrop-blur-md"
-                style={{ animationDelay: "0.1s" }}
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37] anim-pulse-glow" />
-                <p className="font-sans-soft text-[10px] uppercase tracking-[0.5em] text-[#E8D5A3]">
-                  Dear Valued Guest
-                </p>
-              </div>
-
               <p
                 className="font-script anim-fade-up-luxe text-3xl text-[#FFF3D6] sm:text-4xl"
                 style={{ animationDelay: "0.25s" }}
