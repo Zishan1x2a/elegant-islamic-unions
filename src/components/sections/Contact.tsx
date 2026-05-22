@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MessageCircle, MapPin, Instagram } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { SectionHeading } from "@/components/ornaments/SectionHeading";
-import { wedding } from "@/lib/wedding-data";
 
 const familyContacts = [
   {
