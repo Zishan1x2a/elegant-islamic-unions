@@ -488,6 +488,79 @@
     z-index: -3;
   }
 
+  /* ===== Luxe scene nav buttons (Back / Next) ===== */
+  .luxe-nav-btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 9999px;
+    color: #FFF3D6;
+    font-family: var(--font-sans-soft);
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background:
+      linear-gradient(135deg, rgba(20,12,8,0.85) 0%, rgba(10,9,7,0.9) 100%);
+    border: 1px solid rgba(201,168,76,0.55);
+    box-shadow:
+      0 10px 30px -10px rgba(201,168,76,0.45),
+      inset 0 1px 0 rgba(255,243,214,0.15);
+    backdrop-filter: blur(14px);
+    overflow: hidden;
+    transition: transform 350ms cubic-bezier(0.22,1,0.36,1), box-shadow 350ms, border-color 350ms;
+  }
+  .luxe-nav-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 0%, transparent 40%, rgba(255,243,214,0.45) 50%, transparent 60%, transparent 100%);
+    transform: translateX(-120%) skewX(-18deg);
+    transition: transform 900ms ease;
+    pointer-events: none;
+  }
+  .luxe-nav-btn:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.04);
+    border-color: #FFF3D6;
+    box-shadow:
+      0 16px 44px -12px rgba(201,168,76,0.75),
+      inset 0 1px 0 rgba(255,243,214,0.3),
+      0 0 0 1px rgba(255,243,214,0.25);
+  }
+  .luxe-nav-btn:hover:not(:disabled)::before {
+    transform: translateX(120%) skewX(-18deg);
+  }
+  .luxe-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  /* ===== Petals falling animation (thank-you overlay) ===== */
+  @keyframes petal-fall {
+    0%   { transform: translate3d(0, -10vh, 0) rotate(0deg);   opacity: 0; }
+    10%  { opacity: 1; }
+    100% { transform: translate3d(var(--petal-x, 30px), 110vh, 0) rotate(720deg); opacity: 0.9; }
+  }
+  .petal {
+    position: absolute;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 80% 0 80% 0;
+    background: radial-gradient(circle at 30% 30%, #FFE3D6 0%, #F4B6C2 45%, #C46F8A 100%);
+    box-shadow: 0 4px 14px rgba(196,111,138,0.4);
+    animation: petal-fall linear infinite;
+    will-change: transform, opacity;
+  }
+  .petal.gold {
+    background: radial-gradient(circle at 30% 30%, #FFFBEA 0%, #FFE39A 45%, #C9A84C 100%);
+    box-shadow: 0 4px 14px rgba(201,168,76,0.5);
+  }
+  .petal.white {
+    background: radial-gradient(circle at 30% 30%, #FFFFFF 0%, #FFF5E1 60%, #E8D5A3 100%);
+    box-shadow: 0 4px 14px rgba(255,243,214,0.45);
+  }
+
   .cine-vignette {
     background:
       radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.55) 75%, rgba(0,0,0,0.95) 100%);
