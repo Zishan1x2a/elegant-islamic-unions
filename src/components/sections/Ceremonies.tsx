@@ -48,17 +48,17 @@ function CeremonyIcon({ kind }: { kind: Ceremony["icon"] }) {
 // Rich per-event backgrounds matched to the ceremony's mood
 const cardBg: Record<string, string> = {
   mehndi:
-    "radial-gradient(120% 120% at 0% 0%, rgba(232,107,90,0.35) 0%, rgba(184,80,66,0.25) 35%, rgba(43,27,20,0.85) 75%), linear-gradient(160deg,#3a1410 0%,#1a0907 100%)",
+    "radial-gradient(120% 120% at 0% 0%, rgba(255,210,190,0.55) 0%, rgba(250,225,205,0.5) 45%, rgba(252,244,232,0.95) 85%), linear-gradient(160deg,#fff5ec 0%,#fbeadd 100%)",
   sangeet:
-    "radial-gradient(120% 120% at 100% 0%, rgba(168,85,247,0.28) 0%, rgba(201,168,76,0.18) 40%, rgba(43,27,20,0.85) 80%), linear-gradient(160deg,#1f0f2a 0%,#0c0712 100%)",
+    "radial-gradient(120% 120% at 100% 0%, rgba(220,200,250,0.5) 0%, rgba(240,225,200,0.45) 45%, rgba(252,247,238,0.95) 85%), linear-gradient(160deg,#f7f1ff 0%,#fbf3e6 100%)",
   nikah:
-    "radial-gradient(120% 120% at 50% 0%, rgba(255,243,214,0.35) 0%, rgba(201,168,76,0.22) 40%, rgba(22,60,50,0.85) 80%), linear-gradient(160deg,#1d2d20 0%,#0a1410 100%)",
+    "radial-gradient(120% 120% at 50% 0%, rgba(255,243,214,0.7) 0%, rgba(220,235,220,0.5) 45%, rgba(248,250,244,0.95) 85%), linear-gradient(160deg,#f4faf2 0%,#eef5ec 100%)",
   walima:
-    "radial-gradient(120% 120% at 0% 100%, rgba(40,88,71,0.45) 0%, rgba(201,168,76,0.18) 45%, rgba(22,60,50,0.9) 85%), linear-gradient(160deg,#0f2a22 0%,#06120e 100%)",
+    "radial-gradient(120% 120% at 0% 100%, rgba(190,225,205,0.55) 0%, rgba(240,228,200,0.45) 45%, rgba(246,251,244,0.95) 85%), linear-gradient(160deg,#eff8f1 0%,#f7f1e3 100%)",
   reception:
-    "radial-gradient(120% 120% at 100% 100%, rgba(139,115,85,0.4) 0%, rgba(43,27,20,0.6) 40%, rgba(10,9,7,0.95) 85%), linear-gradient(160deg,#2a1d14 0%,#0a0907 100%)",
+    "radial-gradient(120% 120% at 100% 100%, rgba(230,210,180,0.6) 0%, rgba(245,232,210,0.5) 45%, rgba(252,246,236,0.95) 85%), linear-gradient(160deg,#fbf3e6 0%,#f5e8d0 100%)",
   rukhsati:
-    "radial-gradient(120% 120% at 50% 100%, rgba(232,213,163,0.35) 0%, rgba(201,168,76,0.18) 40%, rgba(31,22,18,0.92) 85%), linear-gradient(160deg,#241814 0%,#0a0907 100%)",
+    "radial-gradient(120% 120% at 50% 100%, rgba(248,236,210,0.65) 0%, rgba(238,224,210,0.5) 45%, rgba(252,247,240,0.95) 85%), linear-gradient(160deg,#fdf6ea 0%,#f4e8da 100%)",
 };
 
 export function Ceremonies({ guest }: { guest: Guest }) {
@@ -98,7 +98,9 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                 className="relative overflow-hidden rounded-[1.6rem] p-7 sm:p-9 backdrop-blur-xl"
                 style={{
                   background: cardBg[c.id] ?? cardBg.nikah,
-                  border: "1px solid rgba(201,168,76,0.30)",
+                  border: "1px solid rgba(201,168,76,0.45)",
+                  boxShadow:
+                    "0 1px 0 rgba(255,255,255,0.9) inset, 0 24px 60px -28px rgba(90,60,20,0.35), 0 8px 24px -16px rgba(120,90,40,0.25)",
                 }}
               >
                 <div
@@ -106,47 +108,47 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                   className="pointer-events-none absolute inset-0 -z-10"
                   style={{
                     background:
-                      "repeating-linear-gradient(45deg, rgba(201,168,76,0.06) 0 2px, transparent 2px 14px)",
-                    opacity: 0.5,
+                      "repeating-linear-gradient(45deg, rgba(201,168,76,0.10) 0 1px, transparent 1px 14px)",
+                    opacity: 0.6,
                   }}
                 />
                 <div className="flex items-start justify-between">
                   <div>
-                    <p dir="rtl" className="font-arabic text-2xl text-[#E8D5A3]">
+                    <p dir="rtl" className="font-arabic text-2xl text-[#8a6a1f]">
                       {c.arabic}
                     </p>
-                    <h3 className="font-script mt-1 text-5xl font-light tracking-tight text-[#FFF3D6]">
+                    <h3 className="font-script mt-1 text-5xl font-light tracking-tight text-[#3a2a14]">
                       {c.name}
                     </h3>
                   </div>
-                  <div className="rounded-full border border-[#C9A84C]/40 bg-[#0A0907]/40 p-3">
+                  <div className="rounded-full border border-[#C9A84C]/60 bg-white/70 p-3 shadow-[0_4px_14px_-6px_rgba(120,90,40,0.35)]">
                     <CeremonyIcon kind={c.icon} />
                   </div>
                 </div>
 
-                <ul className="mt-6 space-y-3 font-sans-soft text-sm text-[#FAF8F3]/85">
+                <ul className="mt-6 space-y-3 font-sans-soft text-sm text-[#3a2a14]/85">
                   <li className="flex items-center gap-3">
-                    <Calendar className="h-4 w-4 text-[#C9A84C]" />
+                    <Calendar className="h-4 w-4 text-[#a8842c]" />
                     <span>{c.date}</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <Clock className="h-4 w-4 text-[#C9A84C]" />
+                    <Clock className="h-4 w-4 text-[#a8842c]" />
                     <span>{c.time}</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#a8842c]" />
                     <span>
-                      <span className="font-serif-display text-base italic text-[#FAF8F3]">{c.venue}</span>
+                      <span className="font-serif-display text-base italic text-[#2a1d10]">{c.venue}</span>
                       <br />
-                      <span className="text-[#E8D5A3]/70">{c.address}</span>
+                      <span className="text-[#6b5230]/80">{c.address}</span>
                     </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Shirt className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                    <Shirt className="mt-0.5 h-4 w-4 shrink-0 text-[#a8842c]" />
                     <span>
-                      <span className="font-sans-soft text-[10px] uppercase tracking-[0.32em] text-[#E8D5A3]/70">Dress Code</span>
+                      <span className="font-sans-soft text-[10px] uppercase tracking-[0.32em] text-[#8a6a1f]/80">Dress Code</span>
                       <br />
-                      <span className="font-serif-display text-base italic text-[#FAF8F3]">{c.dressCode}</span>
+                      <span className="font-serif-display text-base italic text-[#2a1d10]">{c.dressCode}</span>
                     </span>
                   </li>
                 </ul>
@@ -156,7 +158,7 @@ export function Ceremonies({ guest }: { guest: Guest }) {
                     href={c.mapsUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#E8D5A3] border-b border-[#C9A84C]/50 pb-1 hover:text-[#FFF3D6] hover:border-[#FFF3D6] transition-colors"
+                    className="group/link inline-flex items-center gap-2 font-sans-soft text-[11px] uppercase tracking-[0.32em] text-[#8a6a1f] border-b border-[#C9A84C]/60 pb-1 hover:text-[#5a3f10] hover:border-[#5a3f10] transition-colors"
                   >
                     Get Direction
                     <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
