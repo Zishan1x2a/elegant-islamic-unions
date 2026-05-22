@@ -311,7 +311,7 @@ export function OpeningScreen({ guest, onOpen }: { guest: Guest; onOpen: () => v
                 className="font-script anim-fade-up-luxe text-3xl text-[#FFF3D6] sm:text-4xl"
                 style={{ animationDelay: "0.25s" }}
               >
-                {guest.name} {guest.honorific}
+                Dear Valued Guest
               </p>
 
               <p
